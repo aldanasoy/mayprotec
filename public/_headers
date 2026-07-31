@@ -1,0 +1,31 @@
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# HSTS - force HTTPS in browsers (1 year, include subdomains)
+# Descomentar solo cuando SSL esté verificado y funcionando 100%
+# Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+# Assets caching
+/_assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+*.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+*.webp
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+*.ico
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+*.json
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+*.woff2
+  Cache-Control: public, max-age=31536000, immutable

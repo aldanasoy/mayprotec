@@ -1,0 +1,10 @@
+# www → non-www (elegir según canonical)
+https://www.mallas-barranquilla.com/* https://mallas-barranquilla.com/:splat 301
+
+# Force trailing slash on root
+/ / 200
+
+# Analytics test page (remove if not needed)
+/test-analytics /test-analytics 200
+
+# SEO: redirect old/non-existent paths (add as needed)
