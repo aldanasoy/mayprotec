@@ -1,43 +1,32 @@
-# Astro Starter Kit: Minimal
+# Mayprotec — Mallas para Balcones en Barranquilla
 
-```sh
-npm create astro@latest -- --template minimal
+Sitio web de Mayprotec (Rank & Rent de Arcoso LLC). Stack: **Astro + Tailwind**, deploy en **Cloudflare Pages**.
+
+## Deploy
+
+- **Repo**: `aldanasoy/mayprotec` (branch `main`)
+- **Hosting**: Cloudflare Pages → proyecto `mayprotec`
+- **Dominios**: `mallas-barranquilla.com` + `www` (CNAME → `mayprotec.pages.dev`)
+- **Cuenta Cloudflare**: `info@sergioaldana.com.co`
+- Cada push a `main` dispara build automático (`npm run build`, output `dist`)
+
+## Seguridad / SSL
+
+- SSL Cloudflare: **Full (Strict)**, **Always Use HTTPS** ON, TLS mín 1.2
+- HSTS: `max-age=15552000; includeSubDomains` (Edge Certificates)
+- `public/_redirects`: www → non-www 301
+- `public/_headers`: security headers + caching
+- Cloudflare Redirect Rule `www to non-www` (edge-level)
+
+## Local
+
+```bash
+npm install
+npm run dev        # localhost:4321
+npm run build      # build a ./dist/
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Notas
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- El proyecto Pages se creó el 2026-07-31 migrando desde GitHub Pages (gh-pages).
+- El Worker `maprotec` (intento previo con wrangler) se eliminó — dejaba un AAAA `100::` que bloqueaba el CNAME del apex.
