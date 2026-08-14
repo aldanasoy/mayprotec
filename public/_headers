@@ -3,10 +3,7 @@
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-
-# HSTS - force HTTPS in browsers (1 year, include subdomains)
-# Descomentar solo cuando SSL esté verificado y funcionando 100%
-# Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
 # Assets caching
 /_assets/*
