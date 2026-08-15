@@ -23,6 +23,15 @@ Este proyecto participa en el sistema multi-agente Arcoso (Hermes + OpenCode + C
 
 ## Historial
 
+### Sprint: Canonicalización de dominio en CF (14-ago-2026, post-deploy)
+GSC no debe ver http/https/www/sin-www como páginas distintas. Estado final verificado en prod:
+- `http://mallas-barranquilla.com` → 301 → `https://mallas-barranquilla.com` (1 hop, via Always Use HTTPS)
+- `http://www.mallas-barranquilla.com` → 301 → `https://mallas-barranquilla.com` (1 hop)
+- `https://www.mallas-barranquilla.com` → 301 → `https://mallas-barranquilla.com` (1 hop, path+query preservados)
+- `https://mallas-barranquilla.com` → 200 directo (0 hops)
+
+**Fix aplicado en Cloudflare (no fue cambio de código):** antes `http://www` hacía 2 hops (http→https por Always Use HTTPS, luego www→apex por `_redirects`). Se creó **Redirect Rule** en fase `http_request_dynamic_redirect` (zone `837e476...`): `http.host eq "www.mallas-barranquilla.com"` → 301 a `https://mallas-barranquilla.com` con `concat("https://mallas-barranquilla.com", http.request.uri.path)` + `preserve_query_string: true`. Así www cae en 1 solo salto directo al apex. La regla www→apex en `public/_redirects` queda como redundante (CF gana por orden de fases).
+
 ### Sprint: Sitemap lastmod + Cache/Perf Cloudflare para GSC (14-ago-2026)
 Contexto: GSC (propiedad Dominio `sc-domain:mallas-barranquilla.com` verificado vía DNS) lee `sitemap-index.xml` (15 URLs) pero reporta **0 páginas descubiertas** — estado esperado en sitio nuevo; sitemap OK, server OK, la cura es tiempo + "Solicitar indexación" desde GSC UI (API GSC = 403 desde este entorno).
 
