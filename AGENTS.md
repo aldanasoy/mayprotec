@@ -23,6 +23,21 @@ Este proyecto participa en el sistema multi-agente Arcoso (Hermes + OpenCode + C
 
 ## Historial
 
+### Sprint: Sitemap lastmod + Cache/Perf Cloudflare para GSC (14-ago-2026)
+Contexto: GSC (propiedad Dominio `sc-domain:mallas-barranquilla.com` verificado vía DNS) lee `sitemap-index.xml` (15 URLs) pero reporta **0 páginas descubiertas** — estado esperado en sitio nuevo; sitemap OK, server OK, la cura es tiempo + "Solicitar indexación" desde GSC UI (API GSC = 403 desde este entorno).
+
+Cambios de código (commit `d6e4f0c`):
+- **`astro.config.mjs`**: `sitemap({ ..., lastmod: new Date('2026-08-14') })` → `<lastmod>` en las 15 URLs + el index.
+- **`public/_headers`**: edge-cache para HTML (`Cache-Control: public, max-age=0, s-maxage=3600, stale-while-revalidate=86400`), sitemaps (`/sitemap-*.xml`, max-age=3600), y reglas nuevas para png/jpg/jpeg/avif/gif (30d + SWR) y `*.txt`. `/_assets/*` immutable 1y (ya estaba).
+- **`public/_redirects`**: `/sitemap.xml → /sitemap-index.xml 301` (antes `/sitemap.xml` devolvía **200 text/html** por fallback SPA — causa probable si se envió ese path a GSC).
+
+Cloudflare (zona `837e476d2efb42417bda2e3fc1a918db`), vía API:
+- **Cache Rule** creada en fase `http_request_cache_settings`: edge cache 2h + stale-while-revalidate para TODO excepto `/_assets/` y `/images/` (que ya son immutable). Free plan: min edge TTL 2h, sin `matches` (solo `starts_with`).
+- **Always Online** activado (`always_online: on`).
+- Settings pre-existentes útiles: `cache_level: aggressive`, `browser_cache_ttl: 14400`, Brotli on, HTTP/3 on, SSL strict, security medium, sin bot/waf bloqueos.
+
+Pendiente por Sergio (manual, en GSC): URL Inspection de `https://mallas-barranquilla.com/` + 3-4 URLs clave → "Solicitar indexación"; esperar 24-72h; re-chequear "Páginas descubiertas".
+
 ### Sprint: GTM + GA4 (14-ago-2026)
 Container GTM `GTM-TCV97SLJ` (cuenta 6371427711, container 261278316, workspace 2 "Default"). GA4: `G-MGY4Q16N34`.
 

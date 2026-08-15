@@ -7,4 +7,7 @@ https://www.mallas-barranquilla.com/* https://mallas-barranquilla.com/:splat 301
 # Analytics test page (remove if not needed)
 /test-analytics /test-analytics 200
 
+# Sitemap alias: /sitemap.xml → sitemap-index.xml (evita que sirva HTML 200)
+/sitemap.xml /sitemap-index.xml 301
+
 # SEO: redirect old/non-existent paths (add as needed)

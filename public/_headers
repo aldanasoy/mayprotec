@@ -5,17 +5,41 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
-# Assets caching
+# HTML: edge cache 1h + stale-while-revalidate (browser revalida cada visita)
+  Cache-Control: public, max-age=0, s-maxage=3600, stale-while-revalidate=86400
+
+# Sitemaps: cache 1h (siempre fresco, nunca bloqueante)
+/sitemap-*.xml
+  Cache-Control: public, max-age=3600, s-maxage=3600
+
+# Hashed assets (JS/CSS Astro) — immutable 1 year
 /_assets/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Imágenes en /images/ — 30 días + SWR
 /images/*
   Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
 
+# Formatos de imagen genéricos — 30 días + SWR
 *.svg
   Cache-Control: public, max-age=31536000, immutable
 
 *.webp
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+*.png
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+*.jpg
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+*.jpeg
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+*.avif
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+*.gif
   Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
 
 *.ico
@@ -26,3 +50,6 @@
 
 *.woff2
   Cache-Control: public, max-age=31536000, immutable
+
+*.txt
+  Cache-Control: public, max-age=3600

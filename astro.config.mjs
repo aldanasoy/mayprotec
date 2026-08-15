@@ -11,6 +11,7 @@ export default defineConfig({
       filter: (page) =>
         !page.includes('/gracias') &&
         !page.includes('/test-analytics'),
+      lastmod: new Date('2026-08-14'),
     }),
   ],
   build: { assets: '_assets' },
