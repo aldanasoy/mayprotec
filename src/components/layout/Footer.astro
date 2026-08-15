@@ -36,11 +36,13 @@ const year = new Date().getFullYear();
         <h3 class="font-semibold text-sm uppercase tracking-wider text-ink-400 mb-4">Servicios</h3>
         <ul class="space-y-2 text-sm text-ink-400">
           {[
+            ['/servicios', 'Todos los servicios'],
+            ['/servicios/malla-para-gatos', 'Malla para gatos'],
+            ['/servicios/malla-para-perros', 'Malla para perros'],
+            ['/servicios/malla-para-ninos', 'Malla para niños'],
             ['/#tipos', 'Mallas para balcones'],
             ['/#tipos', 'Mallas para ventanas'],
             ['/#tipos', 'Mallas para terrazas'],
-            ['/#tipos', 'Protección para mascotas'],
-            ['/#tipos', 'Protección para niños'],
             ['/precios', 'Ver precios'],
           ].map(([href, label]) => (
             <li>

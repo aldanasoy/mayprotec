@@ -1,0 +1,190 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://mallas-barranquilla.com" },
+      { "@type": "ListItem", "position": 2, "name": "Servicios", "item": "https://mallas-barranquilla.com/servicios" },
+      { "@type": "ListItem", "position": 3, "name": "Malla para gatos", "item": "https://mallas-barranquilla.com/servicios/malla-para-gatos" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Malla de seguridad para gatos en Barranquilla",
+    "serviceType": "Instalación de mallas de seguridad para mascotas",
+    "description": "Instalación profesional de malla de seguridad anti caídas para gatos en balcones, ventanas y terrazas de apartamentos y casas en Barranquilla y el Atlántico.",
+    "areaServed": [
+      { "@type": "City", "name": "Barranquilla" },
+      { "@type": "State", "name": "Atlántico" }
+    ],
+    "provider": { "@type": "HomeAndConstructionBusiness", "name": "Mayprotec", "url": "https://mallas-barranquilla.com" },
+    "url": "https://mallas-barranquilla.com/servicios/malla-para-gatos",
+    "offers": { "@type": "Offer", "priceCurrency": "COP", "description": "Cotización gratuita sin compromiso" },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Instalación malla para gatos",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Malla para gatos en balcón" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Malla para gatos en ventana" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Malla para gatos en terraza" } }
+      ]
+    }
+  }
+];
+---
+
+<BaseLayout
+  title="Malla de seguridad para gatos en Barranquilla | Mayprotec"
+  description="Malla anti caídas para gatos en balcones, ventanas y terrazas de Barranquilla. Instalación profesional, material resistente a garras y garantía. Cotiza gratis."
+  canonical="https://mallas-barranquilla.com/servicios/malla-para-gatos"
+  ogImage="/images/malla-gatos.jpg"
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="py-20 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <a href="/" class="inline-flex items-center gap-1.5 text-sm font-medium text-ink-400 hover:text-brand-dark transition-colors mb-6">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          Volver al inicio
+        </a>
+        <span class="section-label">Protección para mascotas</span>
+        <h1 class="font-display font-bold text-3xl md:text-5xl text-ink mt-3 leading-tight">
+          Malla de seguridad para gatos<br />
+          <span class="text-brand-dark">en Barranquilla</span>
+        </h1>
+        <p class="text-ink-600 mt-5 leading-relaxed">
+          Instalamos malla anti caídas para gatos en balcones, ventanas y terrazas de
+          apartamentos y casas en toda Barranquilla y el Atlántico. Material de polietileno
+          de alta densidad, resistente a garras y al sol, instalado con tensado firme
+          y anclajes que soportan el peso del felino.
+        </p>
+        <ul class="mt-6 space-y-2.5">
+          {[
+            'Material de 2.5 mm resistente a garras y cambios de clima',
+            'Instalación invisible: no daña la fachada ni el conjunto',
+            'Garantía por 5 años en tensado y anclajes',
+            'Visita técnica y cotización 100% gratuitas',
+          ].map(f => (
+            <li class="flex items-start gap-2.5 text-sm text-ink-700">
+              <svg class="mt-0.5 flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B9C85" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              {f}
+            </li>
+          ))}
+        </ul>
+        <div class="flex flex-wrap gap-4 mt-8">
+          <button data-open-lead-modal data-modal-location="servicio-gatos" class="btn-primary cursor-pointer">Cotizar gratis</button>
+          <a href="/#contacto" class="btn-secondary">Ir al formulario de contacto</a>
+        </div>
+      </div>
+      <figure class="relative hidden lg:block">
+        <div class="rounded-3xl overflow-hidden shadow-2xl">
+          <img src="/images/malla-gatos.jpg" alt="Gato seguro detrás de malla de protección en ventana de apartamento en Barranquilla" class="w-full h-[480px] object-cover" loading="eager" fetchpriority="high" decoding="async" />
+        </div>
+        <figcaption class="mt-4 text-xs text-ink-400 text-center">Malla de seguridad para gatos instalada en Balcones de Barranquilla</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Por qué -->
+  <section class="py-16 md:py-20 bg-ink-200/30">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="section-label">Seguridad felina</span>
+        <h2 class="section-title mx-auto mt-2">¿Por qué tu gato necesita una malla?</h2>
+        <p class="section-subtitle mx-auto mt-4 text-center">
+          Los gatos no perciben el peligro de las alturas. Su instinto los lleva a asomarse,
+          saltar tras aves o perseguir algo que ven desde el balcón.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {[
+          { t: 'Caídas en pisos altos', d: 'Los accidentes por caídas de mascotas desde balcones y ventanas son la causa más común de visitas veterinarias de urgencia en Barranquilla.' },
+          { t: 'Tranquilidad diaria', d: 'Podrás abrir ventanas y balcones sin miedo. Tu gato disfruta del aire fresco, el sol y la vista, y tú te relajas.' },
+          { t: 'Evita escapes', d: 'Además de caídas, la malla evita que el gato escape y se pierda o se lastime en la calle.' },
+        ].map(c => (
+          <div class="bg-white rounded-3xl p-7 border border-ink-200/60">
+            <h3 class="font-display font-bold text-lg text-ink mb-2">{c.t}</h3>
+            <p class="text-sm text-ink-600 leading-relaxed">{c.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Zonas de instalación -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="section-label">Dónde la instalamos</span>
+        <h2 class="section-title mx-auto mt-2">Balcones, ventanas y terrazas</h2>
+        <p class="section-subtitle mx-auto mt-4 text-center">
+          Protegemos todos los puntos de riesgo por donde un gato podría caer o escapar,
+          tanto en apartamentos como en casas.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {[
+          { t: 'Balcones', d: 'El punto más crítico. Cubrimos toda la abertura con malla tensada fijada a la baranda o la losa sin reducir la vista.' },
+          { t: 'Ventanas', d: 'Para ventanas de guillotina, corredizas o fijas, con sistema que permite abrir y cerrar con la malla colocada.' },
+          { t: 'Terrazas y patios', d: 'En casas y penthouses con zonas amplias, usamos postes y tensores que soportan incluso felinos activos.' },
+        ].map(c => (
+          <div class="bg-brand-50 rounded-3xl p-7 border border-brand/20">
+            <h3 class="font-display font-bold text-lg text-brand-dark mb-2">{c.t}</h3>
+            <p class="text-sm text-ink-600 leading-relaxed">{c.d}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-center text-sm text-ink-500 mt-10">
+        Atendemos todos los barrios de Barranquilla: El Prado, Riomar, Altamira, Villa Country,
+        Ciudad Jardín, Norte, y municipios del Atlántico como Soledad, Puerto Colombia, Barranquilla Norte y Malambo.
+      </p>
+    </div>
+  </section>
+
+  <!-- Proceso -->
+  <section class="py-16 md:py-20 bg-ink-200/30">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="section-label">Cómo trabajamos</span>
+        <h2 class="section-title mx-auto mt-2">De la cotización a la instalación</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          { n: '1', t: 'Contacto', d: 'Nos cuentas el tipo de balcón, ventana o terraza y el comportamiento de tu gato.' },
+          { n: '2', t: 'Visita técnica', d: 'Medimos el área y definimos el sistema de tensado y anclajes adecuado.' },
+          { n: '3', t: 'Cotización', d: 'Recibes un presupuesto claro por escrito, sin costos ocultos.' },
+          { n: '4', t: 'Instalación', d: 'Instalamos en 1 a 4 horas según el tamaño, con materiales certificados.' },
+        ].map(s => (
+          <div class="bg-white rounded-3xl p-6 border border-ink-200/60">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-brand-dark text-white font-bold">{s.n}</span>
+            <h3 class="font-semibold text-ink mt-4">{s.t}</h3>
+            <p class="text-sm text-ink-600 mt-2 leading-relaxed">{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 text-center bg-brand-50 rounded-3xl p-8 md:p-12 border border-brand/20">
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-ink mb-3">
+        Protege a tu gato antes de que sea tarde
+      </h2>
+      <p class="text-ink-600 mb-6 max-w-xl mx-auto">
+        Solicita hoy tu visita técnica gratuita en Barranquilla. Sin compromiso y con
+        respuesta en menos de 2 horas.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <button data-open-lead-modal data-modal-location="servicio-gatos-cta" class="btn-primary cursor-pointer">Cotizar gratis</button>
+        <a href="/servicios" class="btn-secondary">Ver todos los servicios</a>
+        <a href="/" class="btn-secondary">Volver al inicio</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

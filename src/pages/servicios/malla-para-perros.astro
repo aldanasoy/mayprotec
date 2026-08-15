@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://mallas-barranquilla.com" },
+      { "@type": "ListItem", "position": 2, "name": "Servicios", "item": "https://mallas-barranquilla.com/servicios" },
+      { "@type": "ListItem", "position": 3, "name": "Malla para perros", "item": "https://mallas-barranquilla.com/servicios/malla-para-perros" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Malla de seguridad para perros en Barranquilla",
+    "serviceType": "Instalación de mallas de seguridad para mascotas",
+    "description": "Instalación profesional de malla de seguridad para perros en balcones, ventanas, terrazas y patios de casas y apartamentos en Barranquilla y el Atlántico.",
+    "areaServed": [
+      { "@type": "City", "name": "Barranquilla" },
+      { "@type": "State", "name": "Atlántico" }
+    ],
+    "provider": { "@type": "HomeAndConstructionBusiness", "name": "Mayprotec", "url": "https://mallas-barranquilla.com" },
+    "url": "https://mallas-barranquilla.com/servicios/malla-para-perros",
+    "offers": { "@type": "Offer", "priceCurrency": "COP", "description": "Cotización gratuita sin compromiso" },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Instalación malla para perros",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Malla para perros en balcón" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Malla para perros en terraza y patio" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cerramiento para mascotas en casa" } }
+      ]
+    }
+  }
+];
+---
+
+<BaseLayout
+  title="Malla de seguridad para perros en Barranquilla | Mayprotec"
+  description="Malla reforzada para perros en balcones, terrazas y patios de Barranquilla. Resistente a mordidas y empujones, para razas medianas y grandes. Cotiza gratis."
+  canonical="https://mallas-barranquilla.com/servicios/malla-para-perros"
+  ogImage="/images/malla-perros.jpg"
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="py-20 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <a href="/" class="inline-flex items-center gap-1.5 text-sm font-medium text-ink-400 hover:text-brand-dark transition-colors mb-6">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          Volver al inicio
+        </a>
+        <span class="section-label">Protección para mascotas</span>
+        <h1 class="font-display font-bold text-3xl md:text-5xl text-ink mt-3 leading-tight">
+          Malla de seguridad para perros<br />
+          <span class="text-brand-dark">en Barranquilla</span>
+        </h1>
+        <p class="text-ink-600 mt-5 leading-relaxed">
+          Instalamos malla de seguridad para perros en balcones, ventanas, terrazas y patios
+          de casas y apartamentos en toda Barranquilla. Usamos mallas reforzadas de alta
+          tenacidad, diseñadas para resistir el empuje y las mordidas de razas medianas y
+          grandes, con sistema de tensado perimetral.
+        </p>
+        <ul class="mt-6 space-y-2.5">
+          {[
+            'Malla reforzada para razas medianas y grandes',
+            'Resistente a empujones, mordidas y clima de la costa',
+            'Ideal para balcones con hormigón, vidrio o baranda metálica',
+            'Opciones con puertas para perros que entran y salen solos',
+          ].map(f => (
+            <li class="flex items-start gap-2.5 text-sm text-ink-700">
+              <svg class="mt-0.5 flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B9C85" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              {f}
+            </li>
+          ))}
+        </ul>
+        <div class="flex flex-wrap gap-4 mt-8">
+          <button data-open-lead-modal data-modal-location="servicio-perros" class="btn-primary cursor-pointer">Cotizar gratis</button>
+          <a href="/#contacto" class="btn-secondary">Ir al formulario de contacto</a>
+        </div>
+      </div>
+      <figure class="relative hidden lg:block">
+        <div class="rounded-3xl overflow-hidden shadow-2xl">
+          <img src="/images/malla-perros.jpg" alt="Perro protegido en el balcón de un apartamento con malla de seguridad en Barranquilla" class="w-full h-[480px] object-cover" loading="eager" fetchpriority="high" decoding="async" />
+        </div>
+        <figcaption class="mt-4 text-xs text-ink-400 text-center">Malla de seguridad para perros en el balcón de un apartamento en Barranquilla</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Por qué -->
+  <section class="py-16 md:py-20 bg-ink-200/30">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="section-label">Seguridad canina</span>
+        <h2 class="section-title mx-auto mt-2">Los perros no miden el riesgo del balcón</h2>
+        <p class="section-subtitle mx-auto mt-4 text-center">
+          Un perro grande que ve una paloma, otro perro o corre tras una pelota puede
+          atravesar una baranda abierta y caer.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {[
+          { t: 'Fuerza real', d: 'Las barandas y rejas actuales dejan huecos amplios. Una malla reforzada detiene empujones de perros de 30 kg o más sin ceder.' },
+          { t: 'Evita fugas y caídas', d: 'Protege al perro de caídas en terrazas, patios altos y escaleras abiertas, y evita que escape por huecos en rejas.' },
+          { t: 'Apto para exteriores', d: 'Nuestro material resiste el sol del Caribe, la lluvia y el salitre, sin deformarse ni perder tensión con los meses.' },
+        ].map(c => (
+          <div class="bg-white rounded-3xl p-7 border border-ink-200/60">
+            <h3 class="font-display font-bold text-lg text-ink mb-2">{c.t}</h3>
+            <p class="text-sm text-ink-600 leading-relaxed">{c.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Zonas de instalación -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="section-label">Dónde la instalamos</span>
+        <h2 class="section-title mx-auto mt-2">Balcones, terrazas, patios y rejas</h2>
+        <p class="section-subtitle mx-auto mt-4 text-center">
+          Adaptamos la solución al comportamiento de tu perro y al tipo de estructura de tu hogar.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {[
+          { t: 'Balcones de apartamento', d: 'Sistema de tensado firme sobre barandas de vidrio, metal o hormigón, con refuerzos en esquinas.' },
+          { t: 'Terrazas y patios de casas', d: 'Cerramientos perimetrales de buena altura para perros saltarines, con postes y tensores reforzados.' },
+          { t: 'Rejas, ventanas y garajes', d: 'Tapamos huecos y aberturas por donde el perro pueda colarse, incluida la entrada de mascotas.' },
+        ].map(c => (
+          <div class="bg-brand-50 rounded-3xl p-7 border border-brand/20">
+            <h3 class="font-display font-bold text-lg text-brand-dark mb-2">{c.t}</h3>
+            <p class="text-sm text-ink-600 leading-relaxed">{c.d}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-center text-sm text-ink-500 mt-10">
+        Atendemos todos los barrios de Barranquilla: Riomar, El Prado, Altamira, Villa Country,
+        Buenavista, Ciudad Jardín, y municipios del Atlántico como Soledad, Puerto Colombia y Galapa.
+      </p>
+    </div>
+  </section>
+
+  <!-- Proceso -->
+  <section class="py-16 md:py-20 bg-ink-200/30">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="section-label">Cómo trabajamos</span>
+        <h2 class="section-title mx-auto mt-2">De la cotización a la instalación</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          { n: '1', t: 'Contacto', d: 'Nos cuentas la raza, el peso y el comportamiento de tu perro y el espacio a proteger.' },
+          { n: '2', t: 'Visita técnica', d: 'Evaluamos resistencia y altura necesaria según tu perro y la estructura.' },
+          { n: '3', t: 'Cotización', d: 'Recibes un presupuesto claro por escrito, sin costos ocultos.' },
+          { n: '4', t: 'Instalación', d: 'Instalamos en 2 a 6 horas según el tamaño y complejidad.' },
+        ].map(s => (
+          <div class="bg-white rounded-3xl p-6 border border-ink-200/60">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-brand-dark text-white font-bold">{s.n}</span>
+            <h3 class="font-semibold text-ink mt-4">{s.t}</h3>
+            <p class="text-sm text-ink-600 mt-2 leading-relaxed">{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 text-center bg-brand-50 rounded-3xl p-8 md:p-12 border border-brand/20">
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-ink mb-3">
+        Dale a tu perro espacio sin riesgo
+      </h2>
+      <p class="text-ink-600 mb-6 max-w-xl mx-auto">
+        Solicita hoy tu visita técnica gratuita en Barranquilla. Te asesoramos con la malla
+        reforzada ideal para tu mascota.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <button data-open-lead-modal data-modal-location="servicio-perros-cta" class="btn-primary cursor-pointer">Cotizar gratis</button>
+        <a href="/servicios" class="btn-secondary">Ver todos los servicios</a>
+        <a href="/" class="btn-secondary">Volver al inicio</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

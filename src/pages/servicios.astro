@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const services = [
+  {
+    href: '/servicios/malla-para-gatos',
+    title: 'Malla de seguridad para gatos',
+    desc: 'Evita caídas de felinos en balcones y ventanas de apartamentos. Malla de polipropileno resistente a garras, con tensado firme y anclajes seguros.',
+    img: '/images/malla-gatos.jpg',
+    alt: 'Gato mirando por la ventana, protegido con malla de seguridad en Barranquilla',
+    tag: 'Mascotas',
+    keyword: 'malla para gatos en Barranquilla',
+  },
+  {
+    href: '/servicios/malla-para-perros',
+    title: 'Malla de seguridad para perros',
+    desc: 'Protege a tu perro en terrazas, balcones y jardines. Mallas reforzadas pensadas para mascotas medianas y grandes, incluso razas activas.',
+    img: '/images/malla-perros.jpg',
+    alt: 'Perro en el balcón de un apartamento, protegido con malla de seguridad',
+    tag: 'Mascotas',
+    keyword: 'malla para perros en Barranquilla',
+  },
+  {
+    href: '/servicios/malla-para-ninos',
+    title: 'Malla de seguridad para niños',
+    desc: 'Barandas invisibles y mallas anti caídas para balcones y ventanas con niños en casa. Instalación que cumple normas de seguridad para hogares.',
+    img: '/images/malla-ninos.jpg',
+    alt: 'Malla de seguridad para niños instalada junto a una ventana en el hogar',
+    tag: 'Familias',
+    keyword: 'malla para niños en Barranquilla',
+  },
+  {
+    href: '/#tipos',
+    title: 'Mallas para balcones',
+    desc: 'La instalación más solicitada. Cubrimos toda la abertura del balcón con malla tensada, fijada a la estructura sin perforar paredes externas.',
+    img: '/images/espacio-balcon.jpg',
+    alt: 'Malla de seguridad instalada en balcón de apartamento en Barranquilla',
+    tag: 'Más popular',
+    keyword: 'mallas para balcones',
+  },
+  {
+    href: '/#tipos',
+    title: 'Mallas para ventanas',
+    desc: 'Protección para ventanas de cualquier tamaño. Ideal para apartamentos en pisos altos donde los niños pequeños o mascotas pueden asomarse.',
+    img: '/images/espacio-ventana.jpg',
+    alt: 'Malla de seguridad para ventana en Barranquilla',
+    tag: 'Alta demanda',
+    keyword: 'mallas para ventanas',
+  },
+  {
+    href: '/#tipos',
+    title: 'Mallas para terrazas y jardines',
+    desc: 'Terrazas de casas y penthouses con sistemas de tensado perimetral, y protección perimetral para jardines y áreas de juego.',
+    img: '/images/espacio-terraza.jpg',
+    alt: 'Malla de seguridad en terraza de casa en Barranquilla',
+    tag: null,
+    keyword: 'mallas para terrazas y jardines',
+  },
+  {
+    href: '/#tipos',
+    title: 'Apartamentos completos',
+    desc: 'Paquetes integrales para apartamentos: balcón + ventanas + áreas de riesgo. Un solo contrato, un solo técnico, mejor precio.',
+    img: '/images/proceso.jpg',
+    alt: 'Instalación completa de mallas de seguridad en apartamento Barranquilla',
+    tag: 'Mejor precio',
+    keyword: 'mallas para apartamentos',
+  },
+  {
+    href: '/#tipos',
+    title: 'Casas y conjuntos residenciales',
+    desc: 'Para casas de dos o tres pisos con múltiples puntos de riesgo. También trabajamos con conjuntos residenciales con volumen.',
+    img: '/images/galeria-5.jpg',
+    alt: 'Mallas de seguridad para casas en Barranquilla Atlántico',
+    tag: null,
+    keyword: 'mallas para casas en Barranquilla',
+  },
+];
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://mallas-barranquilla.com" },
+      { "@type": "ListItem", "position": 2, "name": "Servicios", "item": "https://mallas-barranquilla.com/servicios" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": services.map((s, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": s.keyword,
+      "url": s.href.startsWith('/#') ? 'https://mallas-barranquilla.com/' : `https://mallas-barranquilla.com${s.href}`
+    }))
+  }
+];
+---
+
+<BaseLayout
+  title="Servicios de mallas de seguridad en Barranquilla | Mayprotec"
+  description="Instalación profesional de mallas para balcones, ventanas, terrazas y protección para mascotas y niños en Barranquilla y el Atlántico. Cotización gratuita."
+  canonical="https://mallas-barranquilla.com/servicios"
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="py-20 md:py-28 bg-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <span class="section-label">Servicios</span>
+      <h1 class="section-title mx-auto mt-2">
+        Servicios de mallas de seguridad<br />
+        <span class="text-brand-dark">en Barranquilla</span>
+      </h1>
+      <p class="section-subtitle mx-auto mt-4 text-center">
+        Instalamos mallas de seguridad en balcones, ventanas, terrazas y jardines, con
+        opciones especializadas para proteger mascotas y niños. Barranquilla y el Atlántico.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 mt-8">
+        <a href="/#tipos" class="btn-primary">Cotización gratuita</a>
+        <button data-open-lead-modal data-modal-location="servicios-index" class="btn-whatsapp cursor-pointer">
+          WhatsApp
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services grid -->
+  <section class="py-16 md:py-20 bg-ink-200/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((s, i) => (
+          <article class="aos aos-delay-{(i % 3) + 1} group relative bg-white rounded-3xl overflow-hidden border border-ink-200/60 hover:border-brand/30 hover:shadow-xl transition-all duration-300">
+            <div class="aspect-[4/3] bg-brand-50 relative overflow-hidden">
+              <img
+                src={s.img}
+                alt={s.alt}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+                decoding="async"
+              />
+              {s.tag && (
+                <span class="absolute top-3 left-3 bg-brand-dark text-white text-xs font-semibold px-2.5 py-1 rounded-lg">
+                  {s.tag}
+                </span>
+              )}
+            </div>
+            <div class="p-6">
+              <h2 class="font-display font-bold text-lg text-ink mb-2 group-hover:text-brand-dark transition-colors">
+                <a href={s.href} class="hover:text-brand-dark transition-colors">{s.title}</a>
+              </h2>
+              <p class="text-sm text-ink-600 leading-relaxed">{s.desc}</p>
+              <a
+                href={s.href.startsWith('/#') ? '/' : s.href}
+                class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand-dark transition-colors"
+              >
+                {s.href.startsWith('/#') ? 'Conocer más desde el inicio' : `Ver ${s.title.toLowerCase()}`}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 text-center bg-brand-50 rounded-3xl p-8 md:p-12 border border-brand/20">
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-ink mb-3">
+        ¿No sabes cuál servicio necesitas?
+      </h2>
+      <p class="text-ink-600 mb-6 max-w-xl mx-auto">
+        Cuéntanos qué quieres proteger y un asesor te recomienda la malla ideal para tu
+        balcón, ventana o terraza en Barranquilla. La cotización y la visita técnica son gratuitas.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/#contacto" class="btn-primary">Hablar con un asesor</a>
+        <a href="/" class="btn-secondary">Volver al inicio</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

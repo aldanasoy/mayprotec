@@ -75,6 +75,18 @@ Pendiente real del negocio: reemplazar placeholders `[WHATSAPP_NUM]` / `[TELEFON
 
 Flujo de deploy: push a `main` → Cloudflare Pages rebuild automático (build: `npm run build`, output `dist`).
 
+### Sprint: Servicios SEO + sitemap limpio para GSC (14-ago-2026)
+- **Sitemap listo para GSC**: `https://mallas-barranquilla.com/sitemap-index.xml` → `sitemap-0.xml` con **15 URLs indexables**. Filtro agregado en `astro.config.mjs` (`sitemap.filter`) que excluye `/gracias` y `/test-analytics` (ambas con `noindex={true}`; `gracias` ya lo tenía, `test-analytics` ahora lo tiene).
+- **Nueva página índice**: `/servicios` (src/pages/servicios.astro) — lista 8 servicios con anclas (a páginas propias o al inicio), schema `BreadcrumbList` + `ItemList`. Agregada al menú Header (después de Inicio) y al Footer (columna Servicios enhorquilló los links nuevos).
+- **3 páginas de servicio nuevas** (SEO por keyword + entidades de ciudad Barranquilla/Atlántico/barrios):
+  - `/servicios/malla-para-gatos` (src/pages/servicios/malla-para-gatos.astro)
+  - `/servicios/malla-para-perros` (src/pages/servicios/malla-para-perros.astro)
+  - `/servicios/malla-para-ninos` (src/pages/servicios/malla-para-ninos.astro)
+  - Cada una con: H1 keyword, title/desc/canonical propios, `ogImage`, schema `BreadcrumbList` + `Service` (con `hasOfferCatalog` y `areaServed`), texto ancla "Volver al inicio", CTA modal (`data-modal-location="servicio-*"`) y links a `/servicios` y `/`.
+  - Fotos Unsplash descargadas a `public/images/`: `malla-gatos.jpg`, `malla-perros.jpg`, `malla-ninos.jpg`.
+- **Tarjetas del home** (`src/components/home/InstallTypes.astro`): ahora 9 tarjetas; agregadas gatos/perros/niños. Cada tarjeta tiene `href` + `linkLabel` → texto ancla a su página de servicio si existe, o al inicio (`/#contacto`) si no (el CTA ya NO abre el modal en esta sección).
+- Build OK (17 páginas). Rebuild automático en CF Pages tras push.
+
 ## Development
 
 ```bash

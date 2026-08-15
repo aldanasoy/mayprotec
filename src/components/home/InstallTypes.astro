@@ -1,12 +1,44 @@
 ---
 const types = [
   {
+    key: 'gatos',
+    title: 'Malla para gatos',
+    desc: 'Protección anti caídas para felinos en balcones, ventanas y terrazas. Material resistente a garras con tensado firme y seguro.',
+    img: '/images/malla-gatos.jpg',
+    alt: 'Malla de seguridad para gatos instalada en ventana de apartamento en Barranquilla',
+    tag: 'Mascotas',
+    href: '/servicios/malla-para-gatos',
+    linkLabel: 'Ver malla para gatos',
+  },
+  {
+    key: 'perros',
+    title: 'Malla para perros',
+    desc: 'Mallas reforzadas para perros medianos y grandes en balcones, terrazas y patios. Resistentes a empujones y mordidas.',
+    img: '/images/malla-perros.jpg',
+    alt: 'Malla de seguridad para perros en balcón de casa en Barranquilla',
+    tag: 'Mascotas',
+    href: '/servicios/malla-para-perros',
+    linkLabel: 'Ver malla para perros',
+  },
+  {
+    key: 'ninos',
+    title: 'Malla para niños',
+    desc: 'Mallas y barandas anti caídas para balcones, ventanas y escaleras de casas con niños. Protección invisible y certificada.',
+    img: '/images/malla-ninos.jpg',
+    alt: 'Malla de seguridad para niños anti caídas en balcón de Barranquilla',
+    tag: 'Familias',
+    href: '/servicios/malla-para-ninos',
+    linkLabel: 'Ver malla para niños',
+  },
+  {
     key: 'balcones',
     title: 'Mallas para balcones',
     desc: 'La instalación más solicitada. Cubrimos toda la abertura del balcón con malla tensada, fijada a la estructura sin perforar paredes externas.',
     img: '/images/espacio-balcon.jpg',
     alt: 'Malla de seguridad instalada en balcón de apartamento en Barranquilla',
     tag: 'Más popular',
+    href: '/#contacto',
+    linkLabel: 'Cotizar este servicio',
   },
   {
     key: 'ventanas',
@@ -15,6 +47,8 @@ const types = [
     img: '/images/espacio-ventana.jpg',
     alt: 'Malla de seguridad para ventana en Barranquilla',
     tag: 'Alta demanda',
+    href: '/#contacto',
+    linkLabel: 'Cotizar este servicio',
   },
   {
     key: 'terrazas',
@@ -23,6 +57,8 @@ const types = [
     img: '/images/espacio-terraza.jpg',
     alt: 'Malla de seguridad en terraza de casa en Barranquilla',
     tag: null,
+    href: '/#contacto',
+    linkLabel: 'Cotizar este servicio',
   },
   {
     key: 'jardines',
@@ -31,6 +67,8 @@ const types = [
     img: '/images/espacio-jardin.jpg',
     alt: 'Malla de seguridad para jardines en Barranquilla',
     tag: 'Familia',
+    href: '/#contacto',
+    linkLabel: 'Cotizar este servicio',
   },
   {
     key: 'apartamentos',
@@ -39,6 +77,8 @@ const types = [
     img: '/images/proceso.jpg',
     alt: 'Instalación completa de mallas de seguridad en apartamento Barranquilla',
     tag: 'Mejor precio',
+    href: '/#contacto',
+    linkLabel: 'Cotizar este servicio',
   },
   {
     key: 'casas',
@@ -47,6 +87,8 @@ const types = [
     img: '/images/galeria-5.jpg',
     alt: 'Mallas de seguridad para casas en Barranquilla Atlántico',
     tag: null,
+    href: '/#contacto',
+    linkLabel: 'Cotizar este servicio',
   },
 ];
 ---
@@ -95,15 +137,14 @@ const types = [
               {t.title}
             </h3>
             <p class="text-sm text-ink-600 leading-relaxed">{t.desc}</p>
-            <button
-              data-open-lead-modal
-              data-modal-location="install-types"
+            <a
+              href={t.href}
               class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand-dark transition-colors"
-              aria-label={`Cotizar ${t.title}`}
+              aria-label={t.linkLabel}
             >
-              Cotizar este servicio
+              {t.linkLabel}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </button>
+            </a>
           </div>
         </article>
       ))}
