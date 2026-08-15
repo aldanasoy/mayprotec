@@ -251,10 +251,20 @@ const btnText     = document.getElementById('modal-btn-text')!;
 const errorEl     = document.getElementById('modal-error')!;
 const errorText   = document.getElementById('modal-error-text')!;
 
+// ─── Analytics helpers (GTM) ──────────────────────────────────────────────────
+declare global {
+  interface Window { dataLayer?: any[]; }
+}
+const pushEvent = (event: string, params?: Record<string, any>) => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event, ...params });
+};
+
 // ─── Open / Close ─────────────────────────────────────────────────────────────
-function openModal() {
+function openModal(triggerLocation = 'unknown') {
   modal.classList.remove('hidden');
   document.body.style.overflow = 'hidden';
+  pushEvent('modal_open', { click_location: triggerLocation });
   // Animate in
   setTimeout(() => {
     panel.classList.remove('scale-95', 'opacity-0');
@@ -296,7 +306,24 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 
 // All trigger buttons with data-open-lead-modal
 document.querySelectorAll('[data-open-lead-modal]').forEach(btn => {
-  btn.addEventListener('click', e => { e.preventDefault(); openModal(); });
+  btn.addEventListener('click', e => {
+    const loc = (btn as HTMLElement).dataset.modalLocation ||
+                (btn.closest('[data-section]') as HTMLElement)?.dataset.section ||
+                'unknown';
+    e.preventDefault();
+    openModal(loc);
+  });
+});
+
+// ─── Analytics: form_start (primer focus en el formulario) ────────────────────
+form.addEventListener('focusin', function onFirstFocus() {
+  pushEvent('form_start', {
+    form_type: 'cotizacion_modal',
+    form_location:
+      document.querySelector('[data-open-lead-modal]')?.getAttribute('data-modal-location') ||
+      'unknown',
+  });
+  form.removeEventListener('focusin', onFirstFocus);
 });
 
 // ─── Form submit ─────────────────────────────────────────────────────────────
@@ -379,6 +406,11 @@ form.addEventListener('submit', async (e) => {
     }
 
     // ── Show success ─────────────────────────────────────────────────────────
+    pushEvent('form_complete', {
+      form_type: 'cotizacion_modal',
+      lead_servicio: data.servicio,
+    });
+
     (document.getElementById('success-name') as HTMLElement).textContent =
       (data.nombre as string).split(' ')[0];
 

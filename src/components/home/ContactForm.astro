@@ -168,9 +168,22 @@ const mapEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24737
 const TG_BOT = '8690717519:AAGqBWOPN-YuSZJkjqjv5yqrFN01mFiG_54';
 const TG_CHAT = '6117124891';
 
+declare global {
+  interface Window { dataLayer?: any[]; }
+}
+const pushEvent = (event: string, params?: Record<string, any>) => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event, ...params });
+};
+
 const form = document.getElementById('contact-form') as HTMLFormElement;
 const submitBtn = document.getElementById('cf-submit') as HTMLButtonElement;
 const btnText = document.getElementById('cf-btn-text') as HTMLElement;
+
+form.addEventListener('focusin', function onFirstFocus() {
+  pushEvent('form_start', { form_type: 'contacto_seccion', form_location: 'contacto' });
+  form.removeEventListener('focusin', onFirstFocus);
+});
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -204,6 +217,8 @@ form.addEventListener('submit', async (e) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ chat_id: TG_CHAT, text: tgMsg, parse_mode: 'Markdown' }),
     }).catch(() => {});
+
+    pushEvent('form_complete', { form_type: 'contacto_seccion', lead_servicio: data.servicio });
 
     window.location.href = '/gracias';
   } catch {

@@ -5,20 +5,12 @@
 export const ANALYTICS = {
   // Google Analytics 4 (GA4)
   ga4: {
-    measurementId: '',  // ← Reemplazar con tu ID: 'G-XXXXXXXXXX'
-    // Ejemplo de cómo obtenerlo:
-    // 1. Ir a https://analytics.google.com/
-    // 2. Administrar → Crear cuenta → Crear propiedad
-    // 3. Copiar Measurement ID (G-XXXXXXXXXX)
+    measurementId: 'G-MGY4Q16N34',
   },
 
   // Google Tag Manager (GTM)
   gtm: {
-    containerId: '',  // ← Reemplazar con tu ID: 'GTM-XXXXXXX'
-    // Ejemplo de cómo obtenerlo:
-    // 1. Ir a https://tagmanager.google.com/
-    // 2. Crear cuenta → Crear contenedor
-    // 3. Copiar Container ID (GTM-XXXXXXX)
+    containerId: 'GTM-TCV97SLJ',
   },
 
   // Google Search Console (GSC)
