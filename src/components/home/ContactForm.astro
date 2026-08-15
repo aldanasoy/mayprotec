@@ -1,6 +1,7 @@
 ---
 // ContactForm.astro — Form inline de contacto con mismo backend que el modal
 // Static-safe: JS intercepta el submit, no depende de POST backend
+import { LEADS } from '../../config/leads';
 const mapEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247372.80659956!2d-74.9447804!3d10.9684693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef42d42a8c8a375%3A0x514957ec1aaa5b!2sBarranquilla%2C+Atl%C3%A1ntico!5e0!3m2!1ses!2sco!4v1710000000000';
 ---
 
@@ -77,8 +78,21 @@ const mapEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24737
                 <option value="terraza">Malla para terraza</option>
                 <option value="apartamento">Apartamento completo</option>
                 <option value="casa">Casa</option>
-                <option value="otro">Otro</option>
+                <option value="otra">Otra</option>
               </select>
+            </div>
+
+            <!-- Otra opción (campo libre corto) -->
+            <div id="cf-otra-wrap" class="hidden">
+              <label for="cf-otra" class="block text-sm font-semibold text-ink mb-1.5">
+                Cuentanos que necesitas
+              </label>
+              <input
+                type="text" id="cf-otra" name="otra_servicio" maxlength="60"
+                placeholder="Ej: pantalla para gatos, malla para escaleras..."
+                autocomplete="off"
+                class="w-full px-4 py-3 rounded-xl border border-ink-200 text-sm focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all"
+              />
             </div>
 
             <!-- Address / Zone -->
@@ -149,24 +163,33 @@ const mapEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24737
           ))}
         </div>
 
-        <!-- WhatsApp CTA -->
-        <a
-          href="https://wa.me/[WHATSAPP_NUM]?text=Hola%2C+quiero+una+cotizaci%C3%B3n+para+mallas+de+seguridad+en+Barranquilla"
-          target="_blank" rel="noopener noreferrer"
-          class="btn-whatsapp w-full justify-center py-4 text-base"
+        <!-- WhatsApp CTA — abre el modal de cotización -->
+        <button
+          data-open-lead-modal
+          data-modal-location="contact-cta"
+          class="btn-whatsapp w-full justify-center py-4 text-base cursor-pointer"
+          aria-label="Solicitar cotización por WhatsApp"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.107 1.524 5.836L.051 23.625a.75.75 0 00.918.918l5.818-1.476A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
           Cotizar por WhatsApp ahora
-        </a>
+        </button>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Config globals (inlined — needed because Astro strips ESM imports from bundles) -->
+<script is:inline set:html={`
+  window.__LEADS_CFG__ = {
+    TG_BOT: ${JSON.stringify(LEADS.TG_BOT)},
+    TG_CHAT: ${JSON.stringify(LEADS.TG_CHAT)},
+    WA_NUMBER: ${JSON.stringify(LEADS.WA_NUMBER)},
+    GL_TOKEN: ${JSON.stringify(LEADS.GL_TOKEN)},
+  };
+`} />
 <script>
-// Inline contact form — same backend as modal (Telegram + Supabase)
-const TG_BOT = '8690717519:AAGqBWOPN-YuSZJkjqjv5yqrFN01mFiG_54';
-const TG_CHAT = '6117124891';
+// Inline contact form — same backend as modal (Telegram + GestionaLeads)
+const { TG_BOT, TG_CHAT, GL_TOKEN } = window.__LEADS_CFG__;
 
 declare global {
   interface Window { dataLayer?: any[]; }
@@ -179,6 +202,20 @@ const pushEvent = (event: string, params?: Record<string, any>) => {
 const form = document.getElementById('contact-form') as HTMLFormElement;
 const submitBtn = document.getElementById('cf-submit') as HTMLButtonElement;
 const btnText = document.getElementById('cf-btn-text') as HTMLElement;
+const servicioSelect = document.getElementById('cf-servicio') as HTMLSelectElement;
+const otraWrap = document.getElementById('cf-otra-wrap');
+const otraInput = document.getElementById('cf-otra') as HTMLInputElement;
+const resolveServicio = () => {
+  if (servicioSelect?.value === 'otra' && otraInput?.value.trim()) {
+    return `otra: ${otraInput.value.trim()}`;
+  }
+  return servicioSelect?.value || '';
+};
+servicioSelect?.addEventListener('change', () => {
+  const isOtra = servicioSelect.value === 'otra';
+  otraWrap?.classList.toggle('hidden', !isOtra);
+  if (isOtra) otraInput?.focus();
+});
 
 form.addEventListener('focusin', function onFirstFocus() {
   pushEvent('form_start', { form_type: 'contacto_seccion', form_location: 'contacto' });
@@ -189,8 +226,9 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const fd = new FormData(form);
   const data = Object.fromEntries(fd.entries());
+  const servicio = resolveServicio();
 
-  if (!data.nombre || !data.telefono || !data.servicio) {
+  if (!data.nombre || !data.telefono || !servicio) {
     alert('Por favor completa nombre, telefono y tipo de instalación.');
     return;
   }
@@ -206,7 +244,7 @@ form.addEventListener('submit', async (e) => {
       `Nombre: ${data.nombre}\n` +
       `WhatsApp: ${data.telefono}\n` +
       `Email: ${data.email || '-'}\n` +
-      `Servicio: ${data.servicio}\n` +
+      `Servicio: ${servicio}\n` +
       `Zona: ${data.zona || '-'}\n` +
       `Detalles: ${data.mensaje || '-'}\n\n` +
       `Hora: ${timestamp}\n` +
@@ -218,7 +256,21 @@ form.addEventListener('submit', async (e) => {
       body: JSON.stringify({ chat_id: TG_CHAT, text: tgMsg, parse_mode: 'Markdown' }),
     }).catch(() => {});
 
-    pushEvent('form_complete', { form_type: 'contacto_seccion', lead_servicio: data.servicio });
+    if (GL_TOKEN) {
+      await fetch(`https://gestionaleads.es/api/in/${GL_TOKEN}/lead/web`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre: data.nombre,
+          telefono: data.telefono,
+          email: data.email || '',
+          fuente: 'mallas-barranquilla.com/contacto',
+          notas: `Servicio: ${servicio}. Zona: ${data.zona}. ${data.mensaje}`,
+        }),
+      }).catch(() => {});
+    }
+
+    pushEvent('form_complete', { form_type: 'contacto_seccion', lead_servicio: servicio });
 
     window.location.href = '/gracias';
   } catch {

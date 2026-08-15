@@ -2,6 +2,7 @@
 // LeadModal.astro — Sistema de captación de leads para Mayprotec
 // Inspired by Repararya'sí modal system
 // Backend: Telegram (live) + Supabase + GestionaLeads (config via env)
+import { LEADS } from '../config/leads';
 ---
 
 <!-- Trigger button para añadir en cualquier sección -->
@@ -114,7 +115,22 @@
                 <option value="terraza">Malla para terraza</option>
                 <option value="apartamento">Apartamento completo</option>
                 <option value="casa">Casa</option>
+                <option value="otra">Otra</option>
               </select>
+            </div>
+
+            <!-- Otra opción (campo libre corto) -->
+            <div id="modal-otra-wrap" class="hidden">
+              <label for="modal-otra" class="block text-xs font-semibold text-ink mb-1">
+                Cuentanos que necesitas
+              </label>
+              <input
+                type="text" id="modal-otra" name="otra_servicio" maxlength="60"
+                placeholder="Ej: pantalla para gatos, malla para escaleras..."
+                class="w-full px-3.5 py-2.5 rounded-xl border border-ink-200 text-sm
+                       focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20
+                       transition-all placeholder:text-ink-300"
+              />
             </div>
 
             <!-- Zona -->
@@ -225,20 +241,20 @@
 <!-- ══════════════════════════════════════════
      LEAD SUBMISSION SCRIPT
 ════════════════════════════════════════════ -->
+<!-- Config globals (inlined — needed because Astro strips ESM imports from bundles) -->
+<script is:inline set:html={`
+  window.__LEADS_CFG__ = {
+    TG_BOT: ${JSON.stringify(LEADS.TG_BOT)},
+    TG_CHAT: ${JSON.stringify(LEADS.TG_CHAT)},
+    WA_NUMBER: ${JSON.stringify(LEADS.WA_NUMBER)},
+    GL_TOKEN: ${JSON.stringify(LEADS.GL_TOKEN)},
+    SUPABASE_URL: '',
+    SUPABASE_KEY: '',
+  };
+`} />
 <script>
 // ─── Config ──────────────────────────────────────────────────────────────────
-const CFG = {
-  // Telegram — alerts to Sergio (ManagitoBot)
-  TG_BOT: '8690717519:AAGqBWOPN-YuSZJkjqjv5yqrFN01mFiG_54',
-  TG_CHAT: '6117124891',          // Sergio personal — cambiar a chat Mayas cuando Sergio cree el grupo
-  // WhatsApp del negocio (reemplazar con número real)
-  WA_NUMBER: '[WHATSAPP_NUM]',
-  // Supabase (activar cuando Sergio provea keys)
-  SUPABASE_URL: '',
-  SUPABASE_KEY: '',
-  // GestionaLeads (activar cuando Sergio provea token)
-  GL_TOKEN: '',
-};
+const CFG = window.__LEADS_CFG__;
 
 // ─── Modal state ──────────────────────────────────────────────────────────────
 const modal   = document.getElementById('lead-modal')!;
@@ -326,14 +342,31 @@ form.addEventListener('focusin', function onFirstFocus() {
   form.removeEventListener('focusin', onFirstFocus);
 });
 
+// ─── Select servicio: mostrar campo "Otra" ─────────────────────────────────────
+const servicioSelect = document.getElementById('modal-servicio') as HTMLSelectElement;
+const otraWrap = document.getElementById('modal-otra-wrap');
+const otraInput = document.getElementById('modal-otra') as HTMLInputElement;
+const resolveServicio = () => {
+  if (servicioSelect?.value === 'otra' && otraInput?.value.trim()) {
+    return `otra: ${otraInput.value.trim()}`;
+  }
+  return servicioSelect?.value || '';
+};
+servicioSelect?.addEventListener('change', () => {
+  const isOtra = servicioSelect.value === 'otra';
+  otraWrap?.classList.toggle('hidden', !isOtra);
+  if (isOtra) otraInput?.focus();
+});
+
 // ─── Form submit ─────────────────────────────────────────────────────────────
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const fd = new FormData(form as HTMLFormElement);
   const data = Object.fromEntries(fd.entries());
+  const servicio = resolveServicio();
 
   // Basic validation
-  if (!data.nombre || !data.telefono || !data.servicio) {
+  if (!data.nombre || !data.telefono || !servicio || (servicio === 'otra' && !String(data.otra_servicio || '').trim())) {
     errorText.textContent = 'Por favor completa nombre, WhatsApp y tipo de instalación.';
     errorEl.classList.remove('hidden');
     return;
@@ -352,7 +385,7 @@ form.addEventListener('submit', async (e) => {
       `*Nuevo Lead - Mayprotec (BAQ)*\n\n` +
       `Nombre: ${data.nombre}\n` +
       `WhatsApp: ${data.telefono}\n` +
-      `Servicio: ${data.servicio}\n` +
+      `Servicio: ${servicio}\n` +
       `Zona: ${data.zona || '-'}\n` +
       `Detalles: ${data.mensaje || '-'}\n\n` +
       `Hora: ${timestamp}\n` +
@@ -381,7 +414,7 @@ form.addEventListener('submit', async (e) => {
         body: JSON.stringify({
           nombre: data.nombre,
           telefono: data.telefono,
-          servicio: data.servicio,
+          servicio: servicio,
           zona: data.zona || null,
           mensaje: data.mensaje || null,
           fuente: 'mallas-barranquilla.com',
@@ -390,7 +423,7 @@ form.addEventListener('submit', async (e) => {
       }).catch(() => {});
     }
 
-    // ── 3. GestionaLeads (when token is provided) ────────────────────────────
+    // ── 3. GestionaLeads ────────────────────────────────────────────────────
     if (CFG.GL_TOKEN) {
       await fetch(`https://gestionaleads.es/api/in/${CFG.GL_TOKEN}/lead/web`, {
         method: 'POST',
@@ -400,7 +433,7 @@ form.addEventListener('submit', async (e) => {
           telefono: data.telefono,
           email: '',
           fuente: 'mallas-barranquilla.com',
-          notas: `Servicio: ${data.servicio}. Zona: ${data.zona}. ${data.mensaje}`,
+          notas: `Servicio: ${servicio}. Zona: ${data.zona}. ${data.mensaje}`,
         }),
       }).catch(() => {});
     }
@@ -408,14 +441,14 @@ form.addEventListener('submit', async (e) => {
     // ── Show success ─────────────────────────────────────────────────────────
     pushEvent('form_complete', {
       form_type: 'cotizacion_modal',
-      lead_servicio: data.servicio,
+      lead_servicio: servicio,
     });
 
     (document.getElementById('success-name') as HTMLElement).textContent =
       (data.nombre as string).split(' ')[0];
 
     const waMsg = encodeURIComponent(
-      `Hola, soy ${data.nombre}. Acabo de solicitar una cotización en mallas-barranquilla.com para ${data.servicio} en ${data.zona || 'Barranquilla'}.`
+      `Hola, soy ${data.nombre}. Acabo de solicitar una cotización en mallas-barranquilla.com para ${servicio} en ${data.zona || 'Barranquilla'}.`
     );
     (document.getElementById('success-wa-link') as HTMLAnchorElement).href =
       `https://wa.me/${CFG.WA_NUMBER}?text=${waMsg}`;

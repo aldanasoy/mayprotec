@@ -64,6 +64,15 @@ Fix:
 
 Pendiente real del negocio: reemplazar placeholders `[WHATSAPP_NUM]` / `[TELEFONO]` en los componentes — hasta que no se reemplace, los clicks `wa.me` apuntan a números ficticios (aunque el trigger GTM los caza igual).
 
+### Sprint: Leads funcionando — Telegram grupal + GestionaLeads (14-ago-2026)
+- **Causa raíz de "no llegaban leads"**: el token del bot Managito hardcodeado en `LeadModal.astro`/`ContactForm.astro` estaba **invalidado (401)**. El token real está en `~/.secrets.env` como `TELEGRAM_BOT_TOKEN` (bot id 8690717519, username `ManagitoBot`).
+- Nueva config central: `src/config/leads.ts` con `LEADS` (TG_BOT real, TG_CHAT grupal `-5513637048`, GL_TOKEN de GestionaLeads Mayprotec `310c31e7...`, WA_NUMBER placeholder).
+- **Gotcha de Astro (importante)**: en `<script>` de componente, Astro **no emite ESM imports en el bundle** → la config quedaba como `LEADS.TG_BOT` sin definir en runtime. Solución: inyectar config vía `<script is:inline set:html>` que define `window.__LEADS_CFG__` ANTES del bundle; el bundle lee `window.__LEADS_CFG__`. Verificado: `dist/index.html` contiene `310c31e7...` y `-5513637048`.
+- Grupo Telegram **Mayprotec** (`-5513637048`) creado por Sergio, bot managito miembro (no admin). Verificado sendMessage real (message_id 96). Ajuste "quién puede agregar miembros → Solo administradores" debe hacerse desde la app (el bot no tiene permiso de cambiar invites; sin username público = no encontrable).
+- GestionaLeads Mayprotec: token API en `leads.ts`; POST a `https://gestionaleads.es/api/in/{token}/lead/web` desde modal y form de contacto.
+- **Botones WhatsApp del sitio ahora abren el modal de captación** (no `wa.me` directo): Hero (`hero-whatsapp`), FAQ (`faq`), ContactForm CTA (`contact-cta`), precios (`precios`), float (ya lo hacía). Solo queda `wa.me` en el step de éxito post-envío (`LeadModal.astro:454` con placeholder WA_NUMBER).
+- **Opción "Otra"** agregada al select "Que necesitas instalar" en modal y ContactForm: muestra un campo libre corto (`otra_servicio`, maxlength 60). El valor se envía como `otra: <texto>` a Telegram/GestionaLeads/dataLayer.
+
 Flujo de deploy: push a `main` → Cloudflare Pages rebuild automático (build: `npm run build`, output `dist`).
 
 ## Development
