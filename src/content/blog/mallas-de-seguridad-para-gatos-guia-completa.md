@@ -1,7 +1,7 @@
 ---
 title: "Mallas de seguridad para gatos: guía completa para dueños responsables"
 description: "Todo lo que necesitas saber sobre mallas de seguridad para gatos: tipos, materiales, tamaño de apertura y consejos para una instalación exitosa."
-date: "2026-07-21"
+date: "2026-03-10"
 author: "Mayprotec"
 image: "/images/blog-mallas-gatos.jpg"
 tags: ["mascotas", "gatos", "seguridad"]

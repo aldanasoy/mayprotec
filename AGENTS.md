@@ -87,6 +87,19 @@ Flujo de deploy: push a `main` → Cloudflare Pages rebuild automático (build: 
 - **Tarjetas del home** (`src/components/home/InstallTypes.astro`): ahora 9 tarjetas; agregadas gatos/perros/niños. Cada tarjeta tiene `href` + `linkLabel` → texto ancla a su página de servicio si existe, o al inicio (`/#contacto`) si no (el CTA ya NO abre el modal en esta sección).
 - Build OK (17 páginas). Rebuild automático en CF Pages tras push.
 
+### Sprint: URLs SEO servicio+ciudad + fechas orgánicas blog (14-ago-2026)
+- **URLs de servicio optimizadas (servicio + ciudad)**: las 3 páginas renombradas con `git mv`:
+  - `/servicios/malla-para-gatos-barranquilla`
+  - `/servicios/malla-para-perros-barranquilla`
+  - `/servicios/malla-para-ninos-barranquilla`
+  - `/servicios` se queda igual. Actualizados canonical, schema (`BreadcrumbList`/`Service` url), hrefs en `InstallTypes.astro`, `Footer.astro` y `servicios.astro` (incl. `ItemList`).
+- **Sin fechas en páginas**: las páginas de servicio no muestran ni emiten `datePublished`/`dateModified`. La fecha solo vive en el blog.
+- **Fechas de blog distribuidas orgánicamente** (antes: las 3 en 2026-07-21 → antinatural):
+  - `como-elegir-malla-seguridad-balcon` → `2025-11-18`
+  - `mallas-de-seguridad-para-gatos-guia-completa` → `2026-03-10`
+  - `proteccion-ninos-balcones-apartamentos` → `2026-07-21`
+- Build OK (17 páginas). Sitemap sin URLs viejas.
+
 ## Development
 
 ```bash

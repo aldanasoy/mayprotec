@@ -1,7 +1,7 @@
 ---
 title: "¿Cómo elegir la malla de seguridad correcta para tu balcón?"
 description: "Guía práctica para entender los diferentes tipos de mallas de seguridad, materiales y sistemas de instalación. Todo lo que necesitas saber antes de comprar."
-date: "2026-07-21"
+date: "2025-11-18"
 author: "Mayprotec"
 image: "/images/blog-elegir-malla.jpg"
 tags: ["guía", "materiales", "mallas"]
