@@ -132,6 +132,16 @@ Aplicación de la 1ª fase del blueprint de mejoras Mayprotec (basado en GSC rea
 - **Niños** (`malla-para-ninos-barranquilla.astro`): sección FAQ visible (4 Q&A) para cobertura semántica.
 - Build OK (17 páginas). Commit `0814ab5`, deploy CF Pages `4be782b0.mayprotec.pages.dev` (build+deploy success).
 
+### Sprint: Alinear Gatos H1/Title con keyword mapping (26-ago-2026, audit Bluejay/ChatGPT)
+Auditoría de bluejay (ChatGPT) confirmó que la landing de gatos no seguía el keyword mapping de Ubersuggest:
+- Gatos estaba ~pos 46-61 (sin posición alta que proteger, a diferencia de Home ~#7) → se puede ser agresivo.
+- **Title**: "Mallas para Gatos en Barranquilla | Instalación de Seguridad" (antes "Malla de seguridad para gatos... | Mayprotec").
+- **H1**: "Mallas para Gatos en Barranquilla" (antes "Malla de seguridad para gatos...").
+- Primer párrafo mantiene semántica: "Instalamos mallas de seguridad para gatos..." (plural refuerza el cluster del H1 nuevo).
+- Suavizada afirmación no verificable: eliminado "causa más común de visitas veterinarias en Barranquilla" → "representan un riesgo importante para gatos en apartamentos altos".
+- **Perros se dejó quieto** (conservador, correcto: ~pos 4.25 en GSC, no hay que arriesgar).
+Commit `94799df`, deploy `f5966ebb.mayprotec.pages.dev` (build+deploy success, verificado).
+
 **PENDIENTE para Sergio** (necesarios para P0/P1 completos, no inventar — el blueprint lo prohíbe):
 - Teléfono real `[TELEFONO]`, número WhatsApp `[WHATSAPP_NUM]` y dirección `[DIRECCION]` (aún placeholders en código en `BaseLayout.astro`, `Footer.astro`, `contacto`, `LeadModal`, `ContactForm`, `leads.ts`).
 - Confirmar garantía REAL: Home dice "1 año" (Hero/Benefits/Process/FAQ) vs landing gatos "5 años en tensado y anclajes". Alinear.
