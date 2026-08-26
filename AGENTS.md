@@ -124,6 +124,20 @@ Flujo de deploy: push a `main` → Cloudflare Pages rebuild automático (build: 
   - `proteccion-ninos-balcones-apartamentos` → `2026-07-21`
 - Build OK (17 páginas). Sitemap sin URLs viejas.
 
+### Sprint: Mejoras SEO contexto del blueprint de GSC (26-ago-2026)
+Aplicación de la 1ª fase del blueprint de mejoras Mayprotec (basado en GSC real + Ubersuggest):
+- **Home**: nueva componente `InstalacionSeguridad.astro` con H2 "Instalación de Mallas de Seguridad en Barranquilla" (~250 palabras, keyword co-principal "mallas de seguridad Barranquilla" striking distance pos~12) + links naturales a `/precios`, landings gatos/perros/niños y `/servicios`. Insertada entre WhyUs e InstallTypes (índice `index.astro`).
+- **Gatos** (`malla-para-gatos-barranquilla.astro`): nueva sección H2 "¿Cómo evitar que tu gato se escape por el balcón o las ventanas?" apuntando a la long-tail "malla para que no se escapen los gatos" (~pos 3 en GSC). Corregida inconsistencia material: "polietileno" → "polipropileno" (el resto del sitio usa polipropileno; el blueprint marcaba la discordancia).
+- **Perros** (`malla-para-perros-barranquilla.astro`): sección FAQ visible (4 Q&A) para cobertura semántica y bloques para long-tails.
+- **Niños** (`malla-para-ninos-barranquilla.astro`): sección FAQ visible (4 Q&A) para cobertura semántica.
+- Build OK (17 páginas). Commit `0814ab5`, deploy CF Pages `4be782b0.mayprotec.pages.dev` (build+deploy success).
+
+**PENDIENTE para Sergio** (necesarios para P0/P1 completos, no inventar — el blueprint lo prohíbe):
+- Teléfono real `[TELEFONO]`, número WhatsApp `[WHATSAPP_NUM]` y dirección `[DIRECCION]` (aún placeholders en código en `BaseLayout.astro`, `Footer.astro`, `contacto`, `LeadModal`, `ContactForm`, `leads.ts`).
+- Confirmar garantía REAL: Home dice "1 año" (Hero/Benefits/Process/FAQ) vs landing gatos "5 años en tensado y anclajes". Alinear.
+- Validar claims: "+150 familias" (Hero), "más de 5 años" (WhyUs), "+45 reseñas / 5.0" (Testimonials), "Instalación disponible hoy". El testimonio de "Manga" es de Cartagena → reubicar/eliminar para hiperlocal Barranquilla.
+- Datos de GBP (Google Business Profile) si aplica para SEO local paralelo.
+
 ## Development
 
 ```bash
