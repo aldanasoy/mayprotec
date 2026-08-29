@@ -91,9 +91,9 @@ const submarkColor = isWhiteBg
         'font-display font-bold tracking-tight leading-none',
         size >= 36 ? 'text-lg' : 'text-base',
         wordmarkColor,
-        'group-hover:text-brand-primary transition-colors'
+        'group-hover:text-brand transition-colors'
       ]}>
-        May<span class="text-brand-primary">protec</span>
+        May<span class={isWhiteBg ? 'text-brand' : 'text-brand-light'}>protec</span>
       </span>
       <span class:list={[
         'text-[10px] font-semibold tracking-wider uppercase mt-0.5',
