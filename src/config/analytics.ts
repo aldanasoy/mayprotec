@@ -29,21 +29,21 @@ export const ANALYTICS = {
 // Google Business Profile (GBP) - Local SEO
 export const GBP = {
   name: 'Mayprotec',
-  phone: '',           // ← Reemplazar: '+573001234567'
-  whatsapp: '',        // ← Reemplazar: '+573001234567'
+  phone: '+573024249707',
+  whatsapp: '+573024249707',
   email: 'info@mallas-barranquilla.com',
 
   address: {
-    streetAddress: '',     // ← Reemplazar si es Rank & Rent con dirección real
+    streetAddress: 'Cl. 93 #71-49 LOCAL L2-211',
     addressLocality: 'Barranquilla',
     addressRegion: 'Atlántico',
-    postalCode: '',
+    postalCode: '080002',
     addressCountry: 'CO'
   },
 
   coordinates: {
-    latitude: 10.9685,
-    longitude: -74.7813
+    latitude: 11.0196,
+    longitude: -74.8289
   },
 
   hours: {
