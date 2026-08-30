@@ -7,7 +7,6 @@ const {
   phone,
   message = 'Hola, me interesa una cotización para mallas de seguridad en Barranquilla.',
 } = Astro.props;
-const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 ---
 
 <!-- WhatsAppFloat — abre modal en vez de ir a WhatsApp -->
