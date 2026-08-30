@@ -1,153 +1,112 @@
 ---
-const types = [
+// Servicios principales (P1-6): máx 6 tarjetas, separadas por "Por espacio" y
+// "Por necesidad". Reduce saturación y no mezcla niveles. "Ver todos" en /servicios.
+import ServiceCard from './ServiceCard.astro';
+
+const porEspacio = [
   {
-    key: 'gatos',
-    title: 'Malla para gatos',
-    desc: 'Protección anti caídas para felinos en balcones, ventanas y terrazas. Material resistente a garras con tensado firme y seguro.',
-    img: '/images/malla-gatos.jpg',
-    alt: 'Malla de seguridad para gatos instalada en ventana de apartamento en Barranquilla',
-    tag: 'Mascotas',
-    href: '/servicios/malla-para-gatos-barranquilla',
-    linkLabel: 'Ver malla para gatos',
+    title: 'Mallas para balcones',
+    desc: 'La instalación más solicitada. Cubrimos toda la abertura del balcón con malla tensada, sin perforar paredes externas.',
+    img: '/images/espacio-balcon.jpg',
+    alt: 'Malla de seguridad instalada en balcón de apartamento en Barranquilla',
+    tag: 'Más popular',
+    href: '/servicios',
   },
   {
-    key: 'perros',
-    title: 'Malla para perros',
-    desc: 'Mallas reforzadas para perros medianos y grandes en balcones, terrazas y patios. Resistentes a empujones y mordidas.',
-    img: '/images/malla-perros.jpg',
-    alt: 'Malla de seguridad para perros en balcón de casa en Barranquilla',
-    tag: 'Mascotas',
-    href: '/servicios/malla-para-perros-barranquilla',
-    linkLabel: 'Ver malla para perros',
+    title: 'Mallas para ventanas',
+    desc: 'Protección para ventanas de cualquier tamaño. Ideal en pisos altos donde niños o mascotas pueden asomarse.',
+    img: '/images/espacio-ventana.jpg',
+    alt: 'Malla de seguridad para ventana en Barranquilla',
+    tag: null,
+    href: '/servicios',
   },
   {
-    key: 'ninos',
-    title: 'Malla para niños',
-    desc: 'Mallas y barandas anti caídas para balcones, ventanas y escaleras de casas con niños. Protección invisible y certificada.',
+    title: 'Mallas para terrazas',
+    desc: 'Terrazas de casas y penthouses. Sistemas de tensado perimetral que soportan el peso de animales grandes.',
+    img: '/images/espacio-terraza.jpg',
+    alt: 'Malla de seguridad en terraza de casa en Barranquilla',
+    tag: null,
+    href: '/servicios',
+  },
+];
+const porNecesidad = [
+  {
+    title: 'Protección para niños',
+    desc: 'Mallas y barandas anti caídas para balcones, ventanas y escaleras. Protección invisible y certificada.',
     img: '/images/malla-ninos.jpg',
     alt: 'Malla de seguridad para niños anti caídas en balcón de Barranquilla',
     tag: 'Familias',
     href: '/servicios/malla-para-ninos-barranquilla',
-    linkLabel: 'Ver malla para niños',
   },
   {
-    key: 'balcones',
-    title: 'Mallas para balcones',
-    desc: 'La instalación más solicitada. Cubrimos toda la abertura del balcón con malla tensada, fijada a la estructura sin perforar paredes externas.',
-    img: '/images/espacio-balcon.jpg',
-    alt: 'Malla de seguridad instalada en balcón de apartamento en Barranquilla',
-    tag: 'Más popular',
-    href: '/#contacto',
-    linkLabel: 'Cotizar este servicio',
-  },
-  {
-    key: 'ventanas',
-    title: 'Mallas para ventanas',
-    desc: 'Protección para ventanas de cualquier tamaño. Ideal para apartamentos en pisos altos donde los niños pequeños o mascotas pueden asomarse.',
-    img: '/images/espacio-ventana.jpg',
-    alt: 'Malla de seguridad para ventana en Barranquilla',
-    tag: 'Alta demanda',
-    href: '/#contacto',
-    linkLabel: 'Cotizar este servicio',
-  },
-  {
-    key: 'terrazas',
-    title: 'Mallas para terrazas',
-    desc: 'Terrazas de casas y penthouses. Cubrimos espacios amplios con sistemas de tensado perimetral que soportan el peso de animales grandes.',
-    img: '/images/espacio-terraza.jpg',
-    alt: 'Malla de seguridad en terraza de casa en Barranquilla',
+    title: 'Protección para gatos',
+    desc: 'Anti caídas para felinos en balcones, ventanas y terrazas. Material resistente a garras con tensado firme.',
+    img: '/images/malla-gatos.jpg',
+    alt: 'Malla de seguridad para gatos instalada en ventana de apartamento en Barranquilla',
     tag: null,
-    href: '/#contacto',
-    linkLabel: 'Cotizar este servicio',
+    href: '/servicios/malla-para-gatos-barranquilla',
   },
   {
-    key: 'jardines',
-    title: 'Mallas para jardines',
-    desc: 'Protección perimetral para jardines y áreas de juego. Ideal para familias con niños o mascotas que disfrutan del aire libre.',
-    img: '/images/espacio-jardin.jpg',
-    alt: 'Malla de seguridad para jardines en Barranquilla',
-    tag: 'Familia',
-    href: '/#contacto',
-    linkLabel: 'Cotizar este servicio',
-  },
-  {
-    key: 'apartamentos',
-    title: 'Apartamentos completos',
-    desc: 'Paquetes integrales para apartamentos: balcón + ventanas + áreas de riesgo. Un solo contrato, un solo técnico, mejor precio.',
-    img: '/images/proceso.jpg',
-    alt: 'Instalación completa de mallas de seguridad en apartamento Barranquilla',
-    tag: 'Mejor precio',
-    href: '/#contacto',
-    linkLabel: 'Cotizar este servicio',
-  },
-  {
-    key: 'casas',
-    title: 'Casas y conjuntos',
-    desc: 'Para casas de dos o tres pisos con múltiples puntos de riesgo. También trabajamos con conjuntos residenciales con volumen.',
-    img: '/images/galeria-5.jpg',
-    alt: 'Mallas de seguridad para casas en Barranquilla Atlántico',
+    title: 'Protección para perros',
+    desc: 'Mallas reforzadas para perros medianos y grandes en balcones, terrazas y patios.',
+    img: '/images/malla-perros.jpg',
+    alt: 'Malla de seguridad para perros en balcón de casa en Barranquilla',
     tag: null,
-    href: '/#contacto',
-    linkLabel: 'Cotizar este servicio',
+    href: '/servicios/malla-para-perros-barranquilla',
   },
 ];
 ---
 
 <section class="py-20 md:py-28 bg-ink-200/30" id="tipos" aria-labelledby="types-heading">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="text-center mb-16">
-      <span class="section-label aos">Tipos de instalación</span>
+    <div class="text-center mb-14">
+      <span class="section-label aos">Qué instalamos</span>
       <h2 id="types-heading" class="section-title aos aos-delay-1 mx-auto">
         Mallas de seguridad para<br />
         <span class="text-brand-dark">cada espacio</span> de tu hogar
       </h2>
       <p class="section-subtitle aos aos-delay-2 mx-auto text-center">
-        Instalamos en balcones, ventanas, terrazas y zonas de riesgo en toda Barranquilla.
-        El servicio se adapta a tu tipo de estructura, sin importar el piso.
+        Protegemos balcones, ventanas y terrazas. Y cuidamos lo que más quieres: niños y mascotas.
       </p>
     </div>
 
-    <!-- Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {types.map((t, i) => (
-        <article class={`aos aos-delay-${(i % 3)+1} group relative bg-white rounded-3xl overflow-hidden border border-ink-200/60 hover:border-brand/30 hover:shadow-xl transition-all duration-300 ${i === 0 ? 'lg:col-span-1 lg:row-span-1' : ''}`}>
-          <!-- Image -->
-          <div class="aspect-[4/3] bg-brand-50 relative overflow-hidden">
-            <img
-              src={t.img}
-              alt={t.alt}
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              width="400"
-              height="300"
-              loading="lazy"
-              decoding="async"
-              onerror="this.parentElement.classList.add('flex','items-center','justify-center'); this.style.display='none'; this.parentElement.insertAdjacentHTML('beforeend', '<svg width=64 height=64 viewBox=\'0 0 24 24\' fill=none stroke=\'#059669\' stroke-width=1.5><rect x=3 y=3 width=18 height=18 rx=2/><path d=\'M3 9h18M9 3v18\'/></svg>')"
-            />
-            {t.tag && (
-              <span class="absolute top-3 left-3 bg-brand-dark text-white text-xs font-semibold px-2.5 py-1 rounded-lg">
-                {t.tag}
-              </span>
-            )}
+    <!-- Por espacio -->
+    <div class="mb-14">
+      <h3 class="aos flex items-center gap-2.5 text-sm font-bold uppercase tracking-wider text-brand-dark mb-6">
+        <span class="w-6 h-0.5 bg-brand rounded-full" aria-hidden="true"></span>
+        Por espacio
+      </h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        {porEspacio.map((t, i) => (
+          <div class={`aos aos-delay-${(i % 3) + 1} h-full`}>
+            <ServiceCard title={t.title} desc={t.desc} img={t.img} alt={t.alt} href={t.href} tag={t.tag} />
           </div>
+        ))}
+      </div>
+    </div>
 
-          <!-- Content -->
-          <div class="p-6">
-            <h3 class="font-display font-bold text-lg text-ink mb-2 group-hover:text-brand-dark transition-colors">
-              {t.title}
-            </h3>
-            <p class="text-sm text-ink-600 leading-relaxed">{t.desc}</p>
-            <a
-              href={t.href}
-              class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand-dark transition-colors"
-              aria-label={t.linkLabel}
-            >
-              {t.linkLabel}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
+    <!-- Por necesidad -->
+    <div>
+      <h3 class="aos flex items-center gap-2.5 text-sm font-bold uppercase tracking-wider text-brand-dark mb-6">
+        <span class="w-6 h-0.5 bg-brand rounded-full" aria-hidden="true"></span>
+        Por necesidad
+      </h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        {porNecesidad.map((t, i) => (
+          <div class={`aos aos-delay-${(i % 3) + 1} h-full`}>
+            <ServiceCard title={t.title} desc={t.desc} img={t.img} alt={t.alt} href={t.href} tag={t.tag} />
           </div>
-        </article>
-      ))}
+        ))}
+      </div>
+    </div>
+
+    <!-- Ver todos -->
+    <div class="mt-12 text-center aos">
+      <a href="/servicios" class="btn-secondary inline-flex items-center gap-2 no-print" aria-label="Ver todos los servicios">
+        Ver todos los servicios
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </div>
   </div>
 </section>

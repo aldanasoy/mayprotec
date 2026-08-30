@@ -1,0 +1,44 @@
+---
+// Tarjeta de servicio reutilizable (P1): imagen 4:3, tag, título, desc, enlace.
+interface Props {
+  title: string;
+  desc: string;
+  img: string;
+  alt: string;
+  href: string;
+  tag?: string | null;
+}
+const { title, desc, img, alt, href, tag } = Astro.props;
+---
+<article class="group relative bg-white rounded-3xl overflow-hidden border border-ink-200/60 hover:border-brand/30 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+  <div class="aspect-[4/3] bg-brand-50 relative overflow-hidden">
+    <img
+      src={img}
+      alt={alt}
+      class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+      width="400"
+      height="300"
+      loading="lazy"
+      decoding="async"
+    />
+    {tag && (
+      <span class="absolute top-3 left-3 bg-brand-dark text-white text-xs font-semibold px-2.5 py-1 rounded-lg">
+        {tag}
+      </span>
+    )}
+  </div>
+  <div class="p-6 flex flex-col flex-1">
+    <h3 class="font-display font-bold text-lg text-ink mb-2 group-hover:text-brand-dark transition-colors">
+      {title}
+    </h3>
+    <p class="text-sm text-ink-600 leading-relaxed">{desc}</p>
+    <a
+      href={href}
+      class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand-dark transition-colors"
+      aria-label={title}
+    >
+      Ver servicio
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</article>

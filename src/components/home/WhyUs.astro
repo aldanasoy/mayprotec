@@ -1,73 +1,86 @@
 ---
+// Por qué elegirnos (P1-10): 4 diferenciales reales, foto a la izquierda,
+// título gramaticalmente correcto, iconos lineales, un solo CTA.
 const reasons = [
   {
-    number: '01',
-    title: 'Experiencia comprobada',
-    desc: 'Más de 5 años instalando mallas de seguridad en Barranquilla y el departamento del Atlántico. Conocemos cada tipo de estructura.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>`,
+    title: 'Instaladores directos',
+    desc: 'No somos intermediarios. Equipo propio con técnicos que trabajan solo en Barranquilla y el área metropolitana.',
   },
   {
-    number: '02',
-    title: 'Materiales de primera',
-    desc: 'Usamos polipropileno de alta densidad importado, tratado contra rayos UV, resistente a la humedad y al calor del Caribe.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`,
+    title: 'Material para el Caribe',
+    desc: 'Polipropileno de alta densidad tratado anti-UV, resistente a la humedad y al calor de la costa.',
   },
   {
-    number: '03',
-    title: 'Cotización sin compromiso',
-    desc: 'Visitamos tu apartamento o casa, medimos y te entregamos un presupuesto exacto sin costo adicional. Sin letras pequeñas.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.08a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>`,
+    title: 'Cotización clara',
+    desc: 'Presupuesto exacto, gratis y por escrito. Sin letras pequeñas ni costos sorpresa.',
   },
   {
-    number: '04',
-    title: 'Instalación el mismo día',
-    desc: 'Una vez aprobada la cotización, nuestro equipo puede instalar en menos de 24 horas para que vivas tranquilo cuanto antes.',
-  },
-  {
-    number: '05',
-    title: 'Discreción total',
-    desc: 'Las mallas se instalan sin perforar las paredes externas y son casi invisibles desde la calle. Tu edificio mantiene su estética.',
-  },
-  {
-    number: '06',
-    title: 'Servicio posventa real',
-    desc: 'No desaparecemos después de cobrar. Si tienes dudas o necesitas ajustes durante el periodo de garantía, respondemos.',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>`,
+    title: 'Garantía y posventa',
+    desc: 'Garantía de 1 año por escrito. No desaparecemos después de cobrar.',
   },
 ];
+const wa = '573024249707';
+const waMsg = encodeURIComponent('Hola Mayprotec, quiero una cotización.');
 ---
 
 <section class="py-20 md:py-28 bg-white" id="por-que-nosotros" aria-labelledby="why-heading">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-    <div class="grid lg:grid-cols-2 gap-16 items-start">
-      <!-- Left: heading -->
-      <div class="lg:sticky lg:top-24">
-        <span class="section-label aos">Por que elegirnos</span>
+      <!-- Foto real -->
+      <div class="relative aos">
+        <div class="rounded-[28px] overflow-hidden shadow-2xl aspect-[4/3] bg-brand-50">
+          <img
+            src="/images/equipo.jpg"
+            alt="Equipo de instaladores de Mayprotec colocando malla de seguridad en Barranquilla"
+            class="w-full h-full object-cover"
+            style="object-position: center 35%"
+            width="600"
+            height="450"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+
+      <!-- Copy + 4 diferenciales -->
+      <div>
+        <span class="section-label aos">Por qué elegirnos</span>
         <h2 id="why-heading" class="section-title aos aos-delay-1">
-          La empresa de mallas<br />
-          de seguridad que<br />
-          <span class="text-brand-dark">más confían</span><br />
-          en Barranquilla
+          La empresa de mallas de seguridad en la que<br />
+          <span class="text-brand-dark">confían las familias</span> de Barranquilla
         </h2>
         <div class="divider aos aos-delay-2"></div>
         <p class="section-subtitle aos aos-delay-2">
-          No somos un intermediario. Somos instaladores directos con equipo propio, materiales en stock y respuesta rápida en toda la ciudad.
+          Somos instaladores directos con equipo propio, materiales en stock y respuesta rápida en toda la ciudad.
         </p>
-        <div class="mt-8 aos aos-delay-3">
-          <a href="/#contacto" class="btn-primary">
-            Pedir cotización gratis
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+
+        <div class="mt-8 grid sm:grid-cols-2 gap-5">
+          {reasons.map((r, i) => (
+            <div class={`aos aos-delay-${(i % 4) + 1} flex flex-col gap-3`}>
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-xl bg-brand-50 text-brand" set:html={r.icon} />
+                <h3 class="font-semibold text-ink text-[15px] leading-tight">{r.title}</h3>
+              </div>
+              <p class="text-sm text-ink-600 leading-relaxed">{r.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-8 aos aos-delay-4">
+          <a href={`https://wa.me/${wa}?text=${waMsg}`} target="_blank" rel="noopener" class="btn-primary inline-flex items-center gap-2 no-print">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.107 1.524 5.836L.051 23.625a.75.75 0 00.918.918l5.818-1.476A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+            </svg>
+            Cotizar por WhatsApp
           </a>
         </div>
       </div>
 
-      <!-- Right: reasons grid -->
-      <div class="grid sm:grid-cols-2 gap-5">
-        {reasons.map((r, i) => (
-          <div class={`aos aos-delay-${(i % 3) + 1} card`}>
-            <span class="text-3xl font-display font-bold text-brand-50/80 text-brand-dark/10 select-none">{r.number}</span>
-            <h3 class="mt-2 font-semibold text-ink text-base">{r.title}</h3>
-            <p class="mt-2 text-sm text-ink-600 leading-relaxed">{r.desc}</p>
-          </div>
-        ))}
-      </div>
     </div>
   </div>
 </section>
