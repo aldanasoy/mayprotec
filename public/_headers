@@ -5,8 +5,9 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
-# HTML: edge cache 1h + stale-while-revalidate (browser revalida cada visita)
-  Cache-Control: public, max-age=0, s-maxage=3600, stale-while-revalidate=86400
+# HTML: NO cachear en edge -> siempre se sirve el último deploy (evita stale
+# como el logo atrasado). El navegador revalida en cada visita.
+  Cache-Control: public, max-age=0, s-maxage=0, must-revalidate
 
 # Sitemaps: cache 1h (siempre fresco, nunca bloqueante)
 /sitemap-*.xml
