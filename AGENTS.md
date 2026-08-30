@@ -23,6 +23,23 @@ Este proyecto participa en el sistema multi-agente Arcoso (Hermes + OpenCode + C
 
 ## Historial
 
+### Sprint: UI/UX P0 + P1 (30-ago-2026) — logo, responsive, home
+Diagnóstico UI/UX externo → ejecución por prioridad. Commits: `248ad24` (P0), `0e630c3` (logo vector), `1872901` (P1 home), `e8fd4b1` (P1 gallery).
+
+**Bug sistémico corregido**: el `@theme` de `global.css` NO definía `--color-brand-primary` ni `--color-ink-DEFAULT` pero el código los usaba profusamente (`bg-brand-primary`, `text-brand-primary`, `bg-ink-DEFAULT`). En Tailwind v4 esas clases no generaban nada → muchas secciones (footer, Benefits, botones) se renderizaban **sin fondo/invisible**. Fix: agregar ambos tokens al `@theme` + cambiar footer a `bg-brand-dark` (verde oscuro). Verificar siempre computed background en navegador.
+
+**Logo**: el enfoque correcto es wordmark como **paths vectoriales** (fonts→fontTools→svg). El `<text>` SVG dependía de que Manrope cargara dentro del SVG → se rompía en varios dispositivos. Convertí "Mayprotec"/"BARRANQUILLA" a `<path>` (Manrope 800 instanced) en `Logo.astro`. Método reproducible: `fontTools.varLib.instancer(instantiateVariableFont, {wght:800})` + `SVGPathPen`. OJO: en fontTools >=4.63 `glyf[g].draw(pen, glyfTable=glyf)` (API nueva).
+
+**Responsive**: verificado con **Playwright local** (`/opt/data/.cache/ms-playwright/chromium-1228`, chrome --no-sandbox) en viewports 320-1440px. Criterio `document.documentElement.scrollWidth === innerWidth` en todos. Requisito: preview Astro + navegador Chromium real (no browserbase).
+
+**Tailwind gotcha crítico**: NO mezclar `hidden` (display base) con `inline-flex`/`flex` (display base) en el mismo elemento — en v4 el orden CSS hace ganar a `flex`. Para "oculto en móvil, flex en desktop" envolver en `<div class="hidden lg:block">` / `<div class="lg:hidden">`. Verificado por `getComputedStyle().display`.
+
+**P0 (commit 248ad24)**: Logo unificado (reutilizado header/drawer/footer), header 64-72px + drawer móvil 44px con scroll-lock/cerrar fuera/Escape/CTA, hero 48/52 con foto 4:3 overflow-hidden + object-position, testimonio como tarjeta en flow en móvil, sin `<br>` forzados, footer verde oscuro AA.
+**P1 (1872901, e8fd4b1)**: Benefits→barra confianza 4 cols, InstallTypes→6 cards agrupadas (ServiceCard.astro), WhyUs→4 diferenciales + título corregido, index→servicios arriba, Gallery→metadata por trabajo (tipo/barrio/espacio/necesidad).
+**P2 pendiente**: lightbox galería, filtros galería, normalización global de CTA, formulario con foto, refinamiento tokens/espaciado, accesibilidad completa, WhatsAppFloat ajustes, footer frase SEO.
+
+
+
 ### Sprint: Canonicalización de dominio en CF (14-ago-2026, post-deploy)
 GSC no debe ver http/https/www/sin-www como páginas distintas. Estado final verificado en prod:
 - `http://mallas-barranquilla.com` → 301 → `https://mallas-barranquilla.com` (1 hop, via Always Use HTTPS)
