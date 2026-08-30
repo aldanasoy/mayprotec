@@ -6,11 +6,13 @@
 @theme {
   --color-brand-dark:    #1B3D2A;
   --color-brand:         #059669;
+  --color-brand-primary: #059669;
   --color-brand-light:   #10B981;
   --color-brand-bg:      #F0FDF4;
   --color-brand-50:      #ECFDF5;
 
   --color-ink:           #0A0A0A;
+  --color-ink-DEFAULT:   #0A0A0A;
   --color-ink-900:       #0A0A0A;
   --color-ink-700:       #1F2937;
   --color-ink-600:       #4B5563;
@@ -43,11 +45,36 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
-
+html, body {
+  max-width: 100%;
+}
 body {
   background: #ffffff;
   color: #0A0A0A;
   overflow-x: hidden;
+}
+
+img, svg, video {
+  display: block;
+  max-width: 100%;
+}
+video, iframe {
+  max-width: 100%;
+}
+section, main, header, footer {
+  min-width: 0;
+}
+.grid > *, .flex > * {
+  min-width: 0;
+}
+
+/* Contenedor estándar */
+.container {
+  width: min(100% - 32px, 1240px);
+  margin-inline: auto;
+}
+@media (max-width: 360px) {
+  .container { width: min(100% - 20px, 1240px); }
 }
 
 h1, h2, h3, h4, h5, h6 {

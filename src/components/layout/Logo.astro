@@ -1,106 +1,75 @@
 ---
-// Mayprotec logo — Setmore-inspired: clean, geometric, professional
-// Hexagonal mesh pattern forming an "M" over a shield silhouette
+// Mayprotec — Logo unificado (composición simple, no reconstruida con texto suelto)
+// mark (malla) + wordmark "Mayprotec" como un TRACTO continuo y legible
+// variant "dark"  -> para fondos claros (header, blanco): mark verde, texto verde oscuro
+// variant "light" -> para fondos oscuros (footer): texto blanco
 interface Props {
-  size?: number;
-  showText?: boolean;
-  variant?: 'default' | 'white' | 'dark';
+  width?: number;
+  height?: number;
+  variant?: 'dark' | 'light';
   class?: string;
 }
-const { size = 36, showText = true, variant = 'default', class: className = '' } = Astro.props;
-
-// Detect white background automatically for better contrast
-const isWhiteBg = variant === 'white' || (variant === 'default' && className.includes('bg-white'));
-const bgColor = isWhiteBg ? 'bg-white border border-gray-200' : 'bg-brand-primary';
-const textColor = isWhiteBg
-  ? 'text-brand-primary'
-  : variant === 'dark' || variant === 'white'
-    ? 'text-white'
-    : 'text-ink-DEFAULT';
-const wordmarkColor = isWhiteBg
-  ? 'text-ink-DEFAULT'
-  : 'text-white';
-const submarkColor = isWhiteBg
-  ? 'text-ink-400'
-  : 'text-white/70';
+const { width = 190, height = 44, variant = 'dark', class: className = '' } = Astro.props;
+// texto y brand
+const textFill = variant === 'light' ? '#ffffff' : '#1B3D2A';
+const accentFill = variant === 'light' ? '#10B981' : '#059669';
 ---
 
-<a href="/" class:list={['flex items-center gap-2.5 group', className]} aria-label="Mayprotec - Inicio">
-  <!-- Icon mark -->
-  <div class:list={['flex-shrink-0 relative overflow-hidden rounded-lg group-hover:scale-105 transition-transform', bgColor]} style={`width:${size}px;height:${size}px`}>
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 40 40"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <!-- Rounded square background (Setmore-style) -->
-            {isWhiteBg ? (
-              <>
-                <rect width="40" height="40" rx="10" fill="white"/>
-                <rect width="40" height="40" rx="10" fill="url(#logoGrad)" opacity="0.1"/>
-              </>
-            ) : (
-              <>
-                <rect width="40" height="40" rx="10" fill="#16a34a"/>
-                <rect width="40" height="40" rx="10" fill="url(#logoGrad)" opacity="0.4"/>
-              </>
-            )}
+<a
+  href="/"
+  class:list={['inline-flex items-center gap-2.5 no-print', className]}
+  style="flex-shrink:0; text-decoration:none"
+  aria-label="Mayprotec - Instalación de mallas de seguridad en Barranquilla"
+>
+  <!-- Mark: malla → M en shield -->
+  <svg
+    width={height}
+    height={height}
+    viewBox="0 0 40 40"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    style="flex-shrink:0"
+  >
+    <rect width="40" height="40" rx="10" fill="#16a34a"/>
+    <g opacity="0.22" stroke="white" stroke-width="0.7">
+      <line x1="6" y1="13" x2="34" y2="13"/>
+      <line x1="6" y1="19" x2="34" y2="19"/>
+      <line x1="6" y1="25" x2="34" y2="25"/>
+      <line x1="13" y1="8" x2="13" y2="32"/>
+      <line x1="20" y1="8" x2="20" y2="32"/>
+      <line x1="27" y1="8" x2="27" y2="32"/>
+    </g>
+    <path d="M9 29V12L14.5 12L20 22L25.5 12H31V29H27V17.5L21.2 27.5H18.8L13 17.5V29H9Z" fill="white"/>
+  </svg>
 
-      <!-- Mesh grid pattern (protective net motif) - white version -->
-      <g opacity={isWhiteBg ? "1" : "0.25"} stroke={isWhiteBg ? "#16a34a" : "white"} stroke-width="0.6">
-        <!-- Horizontal mesh lines -->
-        <line x1="6" y1="13" x2="34" y2="13"/>
-        <line x1="6" y1="19" x2="34" y2="19"/>
-        <line x1="6" y1="25" x2="34" y2="25"/>
-        <!-- Vertical mesh lines -->
-        <line x1="13" y1="8" x2="13" y2="32"/>
-        <line x1="20" y1="8" x2="20" y2="32"/>
-        <line x1="27" y1="8" x2="27" y2="32"/>
-      </g>
-
-      <!-- Letter M — bold, adaptive -->
-      <path
-        d="M9 29V12L14.5 12L20 22L25.5 12H31V29H27V17.5L21.2 27.5H18.8L13 17.5V29H9Z"
-        fill={isWhiteBg ? "#16a34a" : "white"}
-      />
-
-      <!-- Small shield accent bottom-right -->
-      <path
-        d="M30 26C30 29 27.5 31 27.5 31C27.5 31 25 29 25 26V24L27.5 23L30 24V26Z"
-        fill={isWhiteBg ? "#16a34a" : "white"}
-        opacity="0.9"
-      />
-
-      <!-- Gradient definition -->
-      <defs>
-        <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="white" stop-opacity="0.2"/>
-          <stop offset="100%" stop-color="white" stop-opacity="0"/>
-        </linearGradient>
-      </defs>
-    </svg>
-  </div>
-
-  <!-- Wordmark -->
-  {showText && (
-    <div class="flex flex-col leading-none">
-      <span class:list={[
-        'font-display font-bold tracking-tight leading-none',
-        size >= 36 ? 'text-lg' : 'text-base',
-        wordmarkColor,
-        'group-hover:text-brand transition-colors'
-      ]}>
-        May<span class={isWhiteBg ? 'text-brand' : 'text-brand-light'}>protec</span>
-      </span>
-      <span class:list={[
-        'text-[10px] font-semibold tracking-wider uppercase mt-0.5',
-        submarkColor,
-      ]}>
-        Barranquilla
-      </span>
-    </div>
-  )}
+  <!-- Wordmark: Mayprotec como una sola palabra -->
+  <svg
+    width={(width - height) * 0.98}
+    height={height}
+    viewBox="0 0 280 60"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    style="flex-shrink:0"
+  >
+    <text
+      x="2"
+      y="41"
+      fill={textFill}
+      font-family="Manrope, Inter, system-ui, sans-serif"
+      font-size="34"
+      font-weight="800"
+      letter-spacing="-0.5"
+    >Mayprotec</text>
+    <text
+      x="4"
+      y="55"
+      fill={accentFill}
+      font-family="Manrope, Inter, system-ui, sans-serif"
+      font-size="12"
+      font-weight="700"
+      letter-spacing="5"
+    >B A R R A N Q U I L L A</text>
+  </svg>
 </a>

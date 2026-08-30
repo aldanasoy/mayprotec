@@ -1,9 +1,13 @@
 ---
 // Hero — Keyword principal: "Mallas para Balcones en Barranquilla"
-// CTA abre modal de captacion de leads
+// Nueva composición: 48% copy / 52% imagen, radio uniforme, foto 4:3,
+// máximo 2 elementos flotantes, móvil: sello→H1→texto→beneficios→botones→foto
+const wa = '573024249707';
+const waMsg = encodeURIComponent('Hola Mayprotec, quiero una cotización de una malla de seguridad.');
 ---
+
 <section
-  class="relative min-h-[92vh] flex items-center overflow-hidden bg-white"
+  class="relative flex items-center overflow-hidden bg-white"
   aria-labelledby="hero-heading"
 >
   <!-- Background accent -->
@@ -15,13 +19,13 @@
     <div class="absolute inset-0 opacity-[0.02]" style="background-image:repeating-linear-gradient(0deg,#000 0,#000 1px,transparent 1px,transparent 20px),repeating-linear-gradient(90deg,#000 0,#000 1px,transparent 1px,transparent 20px)"></div>
   </div>
 
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 w-full">
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
+  <div class="relative w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 lg:py-24">
+    <div class="grid lg:grid-cols-[48%_52%] gap-8 md:gap-10 lg:gap-8 items-center">
 
       <!-- ── Copy ── -->
       <div>
-        <!-- Pill badge -->
-        <div class="pill mb-6 aos">
+        <!-- Pill badge (sello) -->
+        <div class="pill mb-5 aos">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                stroke-width="2.5" stroke-linecap="round">
             <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
@@ -30,25 +34,23 @@
           Instalación profesional en Barranquilla
         </div>
 
-        <!-- H1 — keyword exacto -->
+        <!-- H1 — keyword exacto, sin <br> forzados, fluye natural -->
         <h1
           id="hero-heading"
-          class="aos aos-delay-1 font-display text-4xl sm:text-5xl lg:text-[3.4rem] font-bold
-                 text-ink leading-[1.06] tracking-tight"
+          class="aos aos-delay-1 font-display text-[2rem] sm:text-5xl lg:text-[3.4rem] font-bold
+                 text-ink leading-[1.08] tracking-tight"
         >
-          Mallas para<br>
-          <span class="text-brand-dark">Balcones</span> en<br>
-          Barranquilla
+          Mallas para <span class="text-brand-dark">balcones</span> en Barranquilla
         </h1>
 
-        <p class="aos aos-delay-2 mt-6 text-lg md:text-xl text-ink-600 leading-relaxed max-w-md">
+        <p class="aos aos-delay-2 mt-5 text-lg md:text-xl text-ink-600 leading-relaxed max-w-md">
           Protege a tus hijos y mascotas con mallas de seguridad de alta resistencia.
           Instalación certificada, material anti-UV,
           <strong class="text-ink font-semibold">garantía incluida</strong>.
         </p>
 
-        <!-- Trust signals -->
-        <ul class="aos aos-delay-3 mt-6 flex flex-wrap gap-3" aria-label="Beneficios clave">
+        <!-- Trust signals (beneficios) -->
+        <ul class="aos aos-delay-3 mt-5 flex flex-wrap gap-x-4 gap-y-2" aria-label="Beneficios clave">
           {[
             'Garantía 1 año',
             'Material anti-UV',
@@ -65,79 +67,56 @@
           ))}
         </ul>
 
-        <!-- CTAs -->
-        <div class="aos aos-delay-4 mt-10 flex flex-wrap gap-4">
-          <button
-            data-open-lead-modal
-            data-modal-location="hero"
-            class="btn-primary cursor-pointer"
-            aria-label="Abrir formulario de cotización"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2" stroke-linecap="round" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.08a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-            </svg>
-            Solicitar cotización
-          </button>
-          <button
-            data-open-lead-modal
-            data-modal-location="hero-whatsapp"
-            class="btn-whatsapp cursor-pointer"
-            aria-label="Solicitar cotización por WhatsApp"
+        <!-- CTAs (apilados full-width en móvil) -->
+        <div class="aos aos-delay-4 mt-8 flex flex-col sm:flex-row gap-3">
+          <a
+            href={`https://wa.me/${wa}?text=${waMsg}`}
+            target="_blank"
+            rel="noopener"
+            class="btn-primary justify-center w-full sm:w-auto cursor-pointer no-print"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.107 1.524 5.836L.051 23.625a.75.75 0 00.918.918l5.818-1.476A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
             </svg>
-            WhatsApp
-          </button>
-        </div>
-
-        <!-- Social proof -->
-        <div class="aos aos-delay-5 mt-10 flex items-center gap-3 text-sm text-ink-600">
-          <div class="flex -space-x-2" aria-hidden="true">
-            {['M','M','M'].map((l,i) => (
-              <div class:list={[
-                'w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold',
-                i === 0 ? 'bg-brand-dark' : i === 1 ? 'bg-brand' : 'bg-brand-light'
-              ]}>{l}</div>
-            ))}
-          </div>
-          <span><strong class="text-ink">+150 familias</strong> protegidas en Barranquilla</span>
+            Cotizar por WhatsApp
+          </a>
+          <a
+            href="/precios"
+            class="btn-secondary justify-center w-full sm:w-auto cursor-pointer no-print"
+          >
+            Ver precios
+          </a>
         </div>
       </div>
 
       <!-- ── Hero Image ── -->
-      <div class="relative aos aos-delay-2">
-        <div class="relative rounded-3xl overflow-hidden shadow-2xl aspect-[9/16] bg-brand-50">
+      <div class="relative">
+        <!-- Imagen: proporción 4/3, radio uniforme, object-position focal en el centro -->
+        <div class="relative rounded-[28px] overflow-hidden shadow-2xl aspect-[4/3] bg-brand-50">
           <img
             src="/images/hero-malla-balcon.jpg"
-            alt="Instalación de malla de seguridad en balcon de apartamento en Barranquilla Colombia"
-            class="w-full h-full object-cover"
-            width="600"
-            height="750"
+            alt="Instalación de malla de seguridad en balcón de apartamento en Barranquilla Colombia"
+            class="absolute inset-0 w-full h-full object-cover"
+            style="object-position: center 40%"
+            width="1024"
+            height="1024"
             loading="eager"
             decoding="async"
           />
-          <!-- Overlay gradient for text readability -->
-          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/30 via-transparent to-transparent"></div>
+          <!-- Overlay suave inferior para legibilidad de badges -->
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/20 via-transparent to-transparent pointer-events-none"></div>
 
-          <!-- Badge: instalación disponible -->
+          <!-- Badge superior (solo 1 elemento flotante alto) -->
           <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2
                       shadow-md flex items-center gap-2 text-sm">
             <div class="w-2 h-2 bg-brand rounded-full animate-pulse" aria-hidden="true"></div>
-            <span class="font-semibold text-ink">Instalación disponible hoy</span>
-          </div>
-
-          <!-- Badge: material -->
-          <div class="absolute bottom-4 right-4 bg-brand-dark text-white rounded-xl px-3 py-2
-                      shadow-md text-sm font-semibold">
-            Material UV resistente
+            <span class="font-semibold text-ink">Instalación disponible esta semana</span>
           </div>
         </div>
 
-        <!-- Floating testimonial card -->
-        <div class="absolute -left-6 top-1/2 -translate-y-1/2 bg-white rounded-2xl p-4 shadow-xl
-                    border border-ink-200/60 max-w-[160px] animate-float hidden lg:block">
+        <!-- Testimonial flotante (desktop, dentro de límites) -->
+        <div class="hidden lg:block absolute -right-4 -bottom-5 bg-white rounded-2xl p-4 shadow-xl
+                    border border-ink-200/60 max-w-[200px]">
           <div class="flex items-center gap-1 mb-1">
             {[0,0,0,0,0].map(() => (
               <svg width="11" height="11" viewBox="0 0 24 24" fill="#F59E0B" aria-hidden="true">
@@ -147,6 +126,19 @@
           </div>
           <p class="text-xs text-ink font-medium leading-tight">"Instalación impecable, muy profesionales"</p>
           <p class="text-[10px] text-ink-400 mt-1">Maria T. — El Prado</p>
+        </div>
+
+        <!-- Móvil: reseña como tarjeta debajo de la foto, dentro de límites -->
+        <div class="lg:hidden mt-4 bg-white rounded-2xl p-4 shadow-md border border-ink-200/60">
+          <div class="flex items-center gap-1 mb-1">
+            {[0,0,0,0,0].map(() => (
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" aria-hidden="true">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            ))}
+          </div>
+          <p class="text-sm text-ink font-medium leading-tight">"Instalación impecable, muy profesionales"</p>
+          <p class="text-xs text-ink-400 mt-1">Maria T. — El Prado</p>
         </div>
       </div>
     </div>
