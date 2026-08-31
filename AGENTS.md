@@ -23,6 +23,19 @@ Este proyecto participa en el sistema multi-agente Arcoso (Hermes + OpenCode + C
 
 ## Historial
 
+### Sprint: Validación auditoría UX/UI externa + CLS/typography fixes (30-ago-2026, OpenCode)
+Revisión cruzada de la auditoría UI/UX de Mayprotec contra el código real (local + prod). La mayoría de "hallazgos" ya estaban corregidos en el sprint UI/UX P0+P1 del mismo día (ver arriba). **La auditoría tenía errores factuales**: (a) el logo NUNCA estuvo roto — es un componente `Logo.astro` con wordmark SVG vectorial; el "corte" en móvil era el estado previo al sprint de la mañana; (b) el footer es `bg-brand-dark` con logo claro (no tarjeta blanca); (c) no hay overflow-x ni 9 tarjetas (son 6, agrupadas por espacio/necesidad desde P1).
+
+**Correcciones reales aplicadas** (commit `23f5378` + merge `b307644`):
+- `Hero.astro`: `width/height` 1024×1024 → 1600×1200 (4:3 real, arregla CLS).
+- `Hero.astro`: "Maria T." → "María T." (tilde, 2 instancias responsive).
+- `WhyUs.astro`: `width/height` 600×450 → 800×600 (4:3).
+- `Gallery.astro`: `width/height` 400×400 → 800×800 (1:1).
+- Verificado `index.astro`: orden de secciones ya correcto (Hero→Benefits→InstallTypes→Gallery→WhyUs→Process→Testimonials→FAQ→InstalacionSeguridad→ContactForm) — coincide con la recomendación de la auditoría.
+- Header móvil: verificado que cabe (272px disponibles vs 180px logo) — no había bug real, era el estado antiguo de prod.
+
+**Pospuesto — imágenes IA**: regeneración de las 14-15 fotos (hero, espacios, necesidad, galería, equipo, proceso) para RnR queda pendiente. Bloqueada por falta de credenciales de generación de imágenes: Gemini free quota agotada del día, OpenRouter sin créditos, gpt-image-* en opencode-go requiere OPENAI_API_KEY real (no la de OpenRouter). Las fotos actuales siguen siendo stock de Unsplash. **Para reanudar**: agregar `GEMINI_API_KEY` con billing o `OPENAI_API_KEY` real a `~/.secrets.env`, y generar con el script documentado en el plan (prompts: "professional real estate photography, modern balcony in Barranquilla, white polypropylene safety net as protagonist, 4:3" etc).
+
 ### Sprint: UI/UX P0 + P1 (30-ago-2026) — logo, responsive, home
 Diagnóstico UI/UX externo → ejecución por prioridad. Commits: `248ad24` (P0), `0e630c3` (logo vector), `1872901` (P1 home), `e8fd4b1` (P1 gallery).
 
