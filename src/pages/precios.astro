@@ -1,7 +1,56 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const schema = {
+const precios = [
+  {
+    material: 'Nylon poliamida',
+    calibre: '~1,0 mm',
+    color: 'Transparente',
+    colorHex: '#E9EEEC',
+    imagen: '/images/muestra-nylon-poliamida-transparente.jpg',
+    resistenciaKg: '190',
+    garantia: '7 años',
+    precio: 45900,
+    popular: false,
+  },
+  {
+    material: 'Polietileno multifilamento',
+    calibre: '1,7 mm',
+    color: 'Blanco',
+    colorHex: '#FFFFFF',
+    imagen: '/images/muestra-polietileno-blanco.jpg',
+    resistenciaKg: '290',
+    garantia: '10 años',
+    precio: 49900,
+    popular: true,
+  },
+  {
+    material: 'Polietileno multifilamento',
+    calibre: '1,7 mm',
+    color: 'Beige claro',
+    colorHex: '#E3D5B8',
+    imagen: '/images/muestra-polietileno-beige.jpg',
+    resistenciaKg: '290',
+    garantia: '10 años',
+    precio: 55900,
+    popular: false,
+  },
+  {
+    material: 'Polietileno multifilamento',
+    calibre: '1,7 mm',
+    color: 'Negro',
+    colorHex: '#1A1A1A',
+    imagen: '/images/muestra-polietileno-negro.jpg',
+    resistenciaKg: '290',
+    garantia: '10 años',
+    precio: 55900,
+    popular: false,
+  },
+];
+
+const formatCOP = (n: number) => n.toLocaleString('es-CO');
+
+const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
@@ -10,19 +59,43 @@ const schema = {
   ]
 };
 
-const precios = [
-  { tipo: 'Balcon pequeño (hasta 2m)', desde: '200.000', hasta: '350.000', tiempo: '1–2 hrs', popular: false },
-  { tipo: 'Balcon mediano (2–4m)', desde: '300.000', hasta: '500.000', tiempo: '2–3 hrs', popular: true },
-  { tipo: 'Balcon grande / terraza', desde: '450.000', hasta: '900.000', tiempo: '3–5 hrs', popular: false },
-  { tipo: 'Ventana estandar', desde: '150.000', hasta: '280.000', tiempo: '45–90 min', popular: false },
-  { tipo: 'Apartamento completo', desde: '600.000', hasta: '1.200.000', tiempo: '1 dia', popular: false },
-  { tipo: 'Casa 2 pisos', desde: '900.000', hasta: '2.000.000', tiempo: '1–2 dias', popular: false },
-];
+const serviceMaterialesSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Instalación de mallas de seguridad por material y color",
+  "serviceType": "Instalación de mallas de seguridad",
+  "provider": { "@type": "HomeAndConstructionBusiness", "name": "Mayprotec", "url": "https://mallas-barranquilla.com" },
+  "areaServed": [
+    { "@type": "City", "name": "Barranquilla" },
+    { "@type": "State", "name": "Atlántico" }
+  ],
+  "offers": precios.map(p => ({
+    "@type": "Offer",
+    "name": `Malla de ${p.material} — ${p.color}`,
+    "priceCurrency": "COP",
+    "availability": "https://schema.org/InStock",
+    "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": p.precio,
+      "priceCurrency": "COP",
+      "unitText": "m2"
+    },
+    "additionalProperty": [
+      { "@type": "PropertyValue", "name": "Material", "value": p.material },
+      { "@type": "PropertyValue", "name": "Calibre", "value": p.calibre },
+      { "@type": "PropertyValue", "name": "Color", "value": p.color },
+      { "@type": "PropertyValue", "name": "Resistencia declarada", "value": `hasta ${p.resistenciaKg} kg/m² en el sistema instalado` },
+      { "@type": "PropertyValue", "name": "Garantía", "value": p.garantia }
+    ]
+  }))
+};
+
+const schema = [breadcrumbSchema, serviceMaterialesSchema];
 ---
 
 <BaseLayout
   title="Precios de mallas de seguridad en Barranquilla | Mayprotec"
-  description="Consulta los precios de instalación de mallas para balcones y ventanas en Barranquilla. Cotización gratuita sin compromiso. Materiales de primera calidad."
+  description="Precios por m² instalado de mallas de seguridad en Barranquilla: nylon poliamida y polietileno multifilamento, en varios colores. Cotización gratuita."
   canonical="https://mallas-barranquilla.com/precios/"
   schema={schema}
 >
@@ -35,8 +108,8 @@ const precios = [
         <span class="text-brand-dark">en Barranquilla</span>
       </h1>
       <p class="section-subtitle mx-auto mt-4 text-center">
-        Los siguientes precios son referenciales. El precio exacto depende del area,
-        tipo de estructura y complejidad. Solicita tu cotización gratuita.
+        Estos son los precios base por m² instalado, según el material y color que elijas.
+        El precio final se confirma después de medir tu espacio, sin sorpresas ni costos ocultos.
       </p>
     </div>
   </section>
@@ -53,25 +126,37 @@ const precios = [
               </span>
             )}
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <h2 class="font-semibold text-ink">{p.tipo}</h2>
-                <p class="text-xs text-ink-400 mt-1">Tiempo de instalación: {p.tiempo}</p>
+              <div class="flex items-start gap-4">
+                <img
+                  src={p.imagen}
+                  alt={`Muestra real de malla en ${p.material.toLowerCase()} color ${p.color.toLowerCase()}`}
+                  width="64"
+                  height="64"
+                  loading="lazy"
+                  class="w-16 h-16 rounded-xl object-cover border-2 border-ink-200 flex-shrink-0"
+                />
+                <div>
+                  <h2 class="font-semibold text-ink">{p.material} <span class="text-ink-400 font-normal">— {p.color}</span></h2>
+                  <p class="text-xs text-ink-400 mt-1">Calibre {p.calibre} · Resistencia declarada y probada de hasta {p.resistenciaKg} kg/m² en el sistema instalado</p>
+                  <p class="text-xs text-ink-400 mt-1">Garantía de {p.garantia}</p>
+                </div>
               </div>
-              <div class="text-right">
+              <div class="text-right flex-shrink-0">
                 <p class="text-sm text-ink-400">Desde</p>
-                <p class="font-display font-bold text-2xl text-brand-dark">${p.desde} <span class="text-sm font-normal text-ink-400">COP</span></p>
-                <p class="text-xs text-ink-400">hasta ~${p.hasta} COP</p>
+                <p class="font-display font-bold text-2xl text-brand-dark">${formatCOP(p.precio)} <span class="text-sm font-normal text-ink-400">COP/m²</span></p>
+                <p class="text-xs text-ink-400">instalado</p>
               </div>
             </div>
           </div>
         ))}
       </div>
+      <p class="text-xs text-ink-400 mt-4 text-center">Fotos de referencia de muestras físicas reales de cada material — no son renders ni fotos de stock.</p>
 
       <div class="mt-12 bg-brand-50 rounded-3xl p-8 text-center border border-brand/20">
         <h2 class="font-display font-bold text-2xl text-ink mb-3">¿Quieres un precio exacto?</h2>
-        <p class="text-ink-600 mb-6">Hacemos una visita tecnica sin costo y te damos el presupuesto exacto al centavo.</p>
+        <p class="text-ink-600 mb-6">Hacemos una visita técnica sin costo y te damos el presupuesto exacto al centavo.</p>
         <div class="flex flex-wrap justify-center gap-4">
-          <a href="/#contacto" class="btn-primary">Solicitar visita gratis</a>
+          <a href="/#contacto" class="btn-primary">Enviar fotos y calcular mi instalación</a>
           <button data-open-lead-modal data-modal-location="precios" class="btn-whatsapp cursor-pointer">
             WhatsApp
           </button>

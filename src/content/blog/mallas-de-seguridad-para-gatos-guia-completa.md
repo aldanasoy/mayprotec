@@ -29,9 +29,13 @@ Adicionalmente, los gatos que escapan por ventanas en apartamentos suelen perder
 
 La apertura no debe permitir que el gato meta la cabeza. Si puede meter la cabeza, puede quedar atrapado, lo que es tan peligroso como no tener malla.
 
-### Material: polipropileno o nylon
+### Material: nylon poliamida o polietileno multifilamento
 
-Ambos materiales son seguros para los gatos. El polipropileno resiste mejor el calor y el sol, mientras que el nylon es más económico. Para Barranquilla, con su clima tropical, el polipropileno es superior.
+Para gatos recomendamos especialmente el **nylon poliamida transparente** (calibre ~1,0 mm): es el de menor impacto visual, casi invisible desde dentro y fuera del apartamento, con resistencia declarada y probada de hasta 190 kg/m² en el sistema instalado y garantía de 7 años — ideal si no quieres que la malla se note en la fachada.
+
+Si tu gato es de mayor tamaño o el balcón recibe más uso, el **polietileno multifilamento** (calibre 1,7 mm, disponible en blanco, beige claro o negro) ofrece mayor calibre y resistencia declarada y probada de hasta 290 kg/m² en el sistema instalado, con garantía de 10 años.
+
+Ambos materiales son anti-UV y resisten bien el clima de Barranquilla. La elección correcta depende de si priorizas la invisibilidad (nylon transparente) o mayor resistencia (polietileno multifilamento). Consulta la comparación completa de materiales, colores y precios en [nuestra página de precios](/precios/).
 
 ### Resistencia: soporte de al menos 10 kg
 
@@ -64,10 +68,10 @@ Generalmente sí, porque los sistemas modernos no requieren perforaciones extern
 
 **¿Cuánto dura la malla?**
 
-Una malla de polipropileno correctamente instalada dura entre 5 y 10 años si se mantiene limpia y se evitan cortes accidentales.
+Depende del material: una malla de nylon poliamida correctamente instalada tiene garantía de 7 años, y una de polietileno multifilamento de 10 años, si se mantiene limpia y se evitan cortes accidentales.
 
 ---
 
 ## ¿Necesitas mallas para tus gatos?
 
-¿Tienes gatos y vives en un apartamento en Barranquilla? **[Contacta a Mayprotec](/)** para una cotización sin compromiso. Instalamos mallas especialmente diseñadas para mascotas con materiales de alta resistencia y garantía de un año.
+¿Tienes gatos y vives en un apartamento en Barranquilla? **[Contacta a Mayprotec](/)** para una cotización sin compromiso. Instalamos mallas especialmente diseñadas para mascotas con materiales de alta resistencia y garantía de hasta 10 años según el material.

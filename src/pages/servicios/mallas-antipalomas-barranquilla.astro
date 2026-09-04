@@ -1,0 +1,265 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceCard from '../../components/home/ServiceCard.astro';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://mallas-barranquilla.com" },
+      { "@type": "ListItem", "position": 2, "name": "Servicios", "item": "https://mallas-barranquilla.com/servicios" },
+      { "@type": "ListItem", "position": 3, "name": "Mallas antipalomas", "item": "https://mallas-barranquilla.com/servicios/mallas-antipalomas-barranquilla" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Malla antipalomas en Barranquilla",
+    "serviceType": "Exclusión física de aves",
+    "description": "Instalación de malla antipalomas en balcones, fachadas, aleros y ductos de apartamentos, edificios y locales comerciales en Barranquilla y el Atlántico. Exclusión física, sin atrapar ni lastimar aves.",
+    "areaServed": [
+      { "@type": "City", "name": "Barranquilla" },
+      { "@type": "State", "name": "Atlántico" }
+    ],
+    "provider": { "@type": "HomeAndConstructionBusiness", "name": "Mayprotec", "url": "https://mallas-barranquilla.com" },
+    "url": "https://mallas-barranquilla.com/servicios/mallas-antipalomas-barranquilla",
+    "offers": { "@type": "Offer", "priceCurrency": "COP", "description": "Cotización gratuita sin compromiso" },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Instalación de malla antipalomas",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Malla antipalomas en balcón o fachada" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cierre de puntos de ingreso en aires acondicionados y ductos" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Malla antipalomas para edificios y locales comerciales" } }
+      ]
+    },
+    "additionalProperty": [
+      { "@type": "PropertyValue", "name": "Material", "value": "Nylon poliamida" },
+      { "@type": "PropertyValue", "name": "Calibre", "value": "~1,0 mm" },
+      { "@type": "PropertyValue", "name": "Color", "value": "Transparente" },
+      { "@type": "PropertyValue", "name": "Resistencia declarada", "value": "hasta 190 kg/m² en el sistema instalado" },
+      { "@type": "PropertyValue", "name": "Garantía", "value": "7 años" }
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title="Mallas Antipalomas en Barranquilla | Mayprotec"
+  description="Malla antipalomas discreta en nylon transparente para balcones, fachadas, aleros y ductos en Barranquilla. Exclusión física, sin lastimar aves. Calcula tu instalación."
+  canonical="https://mallas-barranquilla.com/servicios/mallas-antipalomas-barranquilla/"
+  ogImage="/images/galeria-6.jpg"
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="py-20 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <a href="/" class="inline-flex items-center gap-1.5 text-sm font-medium text-ink-400 hover:text-brand-dark transition-colors mb-6">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          Volver al inicio
+        </a>
+        <span class="section-label">Exclusión física de aves</span>
+        <h1 class="font-display font-bold text-3xl md:text-5xl text-ink mt-3 leading-tight">
+          Mallas Antipalomas<br />
+          <span class="text-brand-dark">en Barranquilla</span>
+        </h1>
+        <p class="text-ink-600 mt-5 leading-relaxed">
+          Instalamos malla antipalomas en balcones, fachadas, aleros y ductos de apartamentos,
+          edificios y locales comerciales en Barranquilla. Cerramos el paso a las aves de forma
+          física, discreta y duradera, sin atraparlas ni lastimarlas.
+        </p>
+        <ul class="mt-6 space-y-2.5">
+          {[
+            'Exclusión física, sin atrapar ni lastimar a las aves',
+            'Nylon transparente: instalación discreta, casi invisible',
+            'Cierre de laterales, parte superior y pequeños puntos de ingreso',
+            'Garantía de 7 años en material e instalación',
+          ].map(f => (
+            <li class="flex items-start gap-2.5 text-sm text-ink-700">
+              <svg class="mt-0.5 flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B9C85" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              {f}
+            </li>
+          ))}
+        </ul>
+        <div class="flex flex-wrap gap-4 mt-8">
+          <button data-open-lead-modal data-modal-location="servicio-antipalomas" class="btn-primary cursor-pointer">Calcula tu instalación</button>
+          <a href="/#contacto" class="btn-secondary">Ir al formulario de contacto</a>
+        </div>
+      </div>
+      <figure class="relative hidden lg:block">
+        <div class="rounded-3xl overflow-hidden shadow-2xl">
+          <img src="/images/galeria-6.jpg" alt="Malla de seguridad transparente instalada en balcón de edificio en Barranquilla" class="w-full h-[480px] object-cover" loading="eager" fetchpriority="high" decoding="async" />
+        </div>
+        <figcaption class="mt-4 text-xs text-ink-400 text-center">Malla antipalomas discreta en nylon transparente</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Por qué -->
+  <section class="py-16 md:py-20 bg-ink-200/30">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="section-label">Exclusión física</span>
+        <h2 class="section-title mx-auto mt-2">¿Por qué instalar malla antipalomas?</h2>
+        <p class="section-subtitle mx-auto mt-4 text-center">
+          Las palomas y otras aves urbanas buscan balcones, aleros y equipos de aire acondicionado
+          como refugio. Una barrera física bien instalada cierra ese acceso.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {[
+          { t: 'Exclusión física real', d: 'Cierra el paso físicamente, sin atrapar ni dañar a las aves.' },
+          { t: 'Instalación discreta', d: 'El nylon transparente casi no se nota, ni desde fuera ni desde dentro del apartamento.' },
+          { t: 'Menos suciedad y desgaste', d: 'Evita heces, plumas y anidación en tu balcón, terraza, fachada o equipo de aire acondicionado.' },
+        ].map(c => (
+          <div class="bg-white rounded-3xl p-7 border border-ink-200/60">
+            <h3 class="font-display font-bold text-lg text-ink mb-2">{c.t}</h3>
+            <p class="text-sm text-ink-600 leading-relaxed">{c.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Copy SEO -->
+  <section class="py-16 md:py-20 bg-white" id="malla-antipalomas-barranquilla">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <span class="section-label">Cómo funciona</span>
+        <h2 class="section-title mx-auto mt-2">Malla antipalomas en nylon transparente</h2>
+      </div>
+      <div class="space-y-6 text-ink-600 leading-relaxed text-base md:text-lg">
+        <p>
+          Las palomas y otras aves urbanas buscan balcones, aleros, ductos y unidades de aire
+          acondicionado como refugio y sitio de anidación. El resultado suele ser acumulación de
+          heces, plumas, ruido y desgaste en fachadas y equipos. Nuestra solución es la
+          <strong>exclusión física</strong>: instalamos malla de <strong>nylon poliamida
+          transparente</strong> (calibre ~1,0 mm), con resistencia declarada y probada de hasta
+          190 kg/m² en el sistema instalado y garantía de 7 años, que cierra el paso a las aves
+          sin atraparlas ni lastimarlas.
+        </p>
+        <p>
+          Recomendamos el nylon transparente para este tipo de instalación porque es el material
+          de menor impacto visual: se nota muy poco desde la calle o desde dentro del apartamento,
+          algo especialmente importante en fachadas y balcones donde no quieres que la malla se vea.
+        </p>
+        <p>
+          El trabajo cubre el <strong>cierre de laterales</strong>, la <strong>parte superior</strong>
+          del área expuesta y los <strong>pequeños puntos de ingreso</strong> por donde las aves
+          suelen entrar — muchas veces zonas que un dueño de casa no revisa, como el espacio detrás
+          de un equipo de <strong>aire acondicionado</strong>, aleros o <strong>ductos</strong> de
+          ventilación. Revisamos cada uno de esos puntos durante la visita técnica para que el
+          cierre quede completo.
+        </p>
+        <p>
+          Instalamos en apartamentos, edificios residenciales y locales comerciales en Barranquilla
+          y el Atlántico. Es una barrera física duradera y respetuosa con los animales: no usamos
+          trampas, venenos ni métodos que dañen a las aves, solo un cierre bien instalado que las
+          mantiene fuera de tu espacio.
+        </p>
+      </div>
+      <div class="mt-8 text-center">
+        <button data-open-lead-modal data-modal-location="servicio-antipalomas-copy" class="btn-primary cursor-pointer">Calcula tu instalación</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zonas de instalación -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="section-label">Dónde la instalamos</span>
+        <h2 class="section-title mx-auto mt-2">Balcones, fachadas, ductos y aires acondicionados</h2>
+        <p class="section-subtitle mx-auto mt-4 text-center">
+          Revisamos cada punto por donde las aves pueden entrar, no solo el área más visible.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {[
+          { t: 'Balcones y fachadas', d: 'Cierre de laterales y parte superior para bloquear el acceso de aves sin alterar la vista.' },
+          { t: 'Aires acondicionados, aleros y ductos', d: 'Revisión y cierre de los puntos de ingreso que más se pasan por alto.' },
+          { t: 'Edificios y locales comerciales', d: 'Instalación en fachadas, cubiertas y zonas comunes de conjuntos y negocios.' },
+        ].map(c => (
+          <div class="bg-brand-50 rounded-3xl p-7 border border-brand/20">
+            <h3 class="font-display font-bold text-lg text-brand-dark mb-2">{c.t}</h3>
+            <p class="text-sm text-ink-600 leading-relaxed">{c.d}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-center text-sm text-ink-500 mt-10">
+        Atendemos apartamentos, edificios y locales comerciales en Barranquilla y municipios del
+        Atlántico como Soledad, Puerto Colombia y Malambo.
+      </p>
+    </div>
+  </section>
+
+  <!-- Proceso -->
+  <section class="py-16 md:py-20 bg-ink-200/30">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="section-label">Cómo trabajamos</span>
+        <h2 class="section-title mx-auto mt-2">De la visita técnica al cierre completo</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          { n: '1', t: 'Contacto', d: 'Nos cuentas dónde están las aves y qué zonas quieres proteger.' },
+          { n: '2', t: 'Visita técnica', d: 'Revisamos balcones, aleros, ductos y aires acondicionados para ubicar todos los puntos de ingreso.' },
+          { n: '3', t: 'Cotización', d: 'Recibes un presupuesto claro por escrito, sin costos ocultos.' },
+          { n: '4', t: 'Instalación', d: 'Instalamos la malla de nylon transparente cerrando cada punto de acceso.' },
+        ].map(s => (
+          <div class="bg-white rounded-3xl p-6 border border-ink-200/60">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-brand-dark text-white font-bold">{s.n}</span>
+            <h3 class="font-semibold text-ink mt-4">{s.t}</h3>
+            <p class="text-sm text-ink-600 mt-2 leading-relaxed">{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios relacionados -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="section-label">También te puede interesar</span>
+        <h2 class="section-title mx-auto mt-2">Otras soluciones de protección</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <ServiceCard
+          title="Mallas de protección comercial"
+          desc="Bodegas, depósitos y zonas restringidas: cerramientos adaptados a la operación de tu negocio."
+          img="/images/equipo.jpg"
+          alt="Equipo de Mayprotec instalando malla de protección comercial en Barranquilla"
+          href="/servicios/mallas-de-proteccion-comercial-barranquilla"
+        />
+        <ServiceCard
+          title="Malla de seguridad para gatos"
+          desc="El mismo nylon transparente de bajo impacto visual, pensado para evitar caídas y escapes de gatos."
+          img="/images/malla-gatos.jpg"
+          alt="Gato protegido con malla de seguridad en balcón de Barranquilla"
+          href="/servicios/malla-para-gatos-barranquilla"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 text-center bg-brand-50 rounded-3xl p-8 md:p-12 border border-brand/20">
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-ink mb-3">
+        Cierra el paso a las palomas sin lastimarlas
+      </h2>
+      <p class="text-ink-600 mb-6 max-w-xl mx-auto">
+        Solicita hoy tu visita técnica y calcula tu instalación de malla antipalomas en
+        Barranquilla.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <button data-open-lead-modal data-modal-location="servicio-antipalomas-cta" class="btn-primary cursor-pointer">Calcula tu instalación</button>
+        <a href="/servicios" class="btn-secondary">Ver todos los servicios</a>
+        <a href="/" class="btn-secondary">Volver al inicio</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

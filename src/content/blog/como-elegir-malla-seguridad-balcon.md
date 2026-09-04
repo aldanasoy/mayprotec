@@ -15,16 +15,14 @@ Cuando decides proteger tu balcón con una malla de seguridad, la primera pregun
 
 ## 1. Tipo de material: el factor más importante
 
-La gran mayoría de mallas de seguridad para uso residencial se fabrican en **polipropileno de alta densidad (HDPE)**. Este material tiene varias ventajas clave:
+En instalaciones residenciales trabajamos principalmente con dos familias de material, ambas anti-UV y resistentes a la humedad y al calor de la costa:
 
-- Resistente a la radiación ultravioleta (no se degrada con el sol)
-- Flexible pero resistente a impactos
-- No absorbe agua ni humedad
-- Suave al tacto para mascotas y niños
+- **Nylon poliamida** (calibre ~1,0 mm, color transparente): el de menor impacto visual, casi imperceptible desde la calle o el balcón. Resistencia declarada y probada de hasta 190 kg/m² en el sistema instalado.
+- **Polietileno multifilamento** (calibre 1,7 mm, disponible en blanco, beige claro y negro): mayor calibre, pensado para donde se necesita más resistencia. Resistencia declarada y probada de hasta 290 kg/m² en el sistema instalado.
 
-También existen mallas de nylon y de acero inoxidable. El acero es más resistente pero más costoso y suele usarse en instalaciones industriales o en terrazas muy amplias con requisitos específicos.
+También existe la malla de acero inoxidable, más costosa y habitual en instalaciones industriales o terrazas muy amplias con requisitos específicos — no suele ser necesaria para un balcón o ventana residencial.
 
-**Nuestra recomendación:** Para balcones y ventanas residenciales en Barranquilla, el polipropileno de alta densidad es la mejor opción por su relación calidad-precio y su desempeño bajo el clima del Caribe.
+**Nuestra recomendación:** no hay un material universalmente "mejor" — depende de si priorizas que la malla se note lo menos posible (nylon transparente) o mayor resistencia para mascotas grandes o zonas de mucho uso (polietileno multifilamento). Puedes ver la comparación completa de materiales, colores, garantías y precios por m² en [nuestra página de precios](/precios/).
 
 ---
 

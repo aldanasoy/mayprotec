@@ -23,6 +23,41 @@ Este proyecto participa en el sistema multi-agente Arcoso (Hermes + OpenCode + C
 
 ## Historial
 
+### Sprint: Corrección de materiales/garantías + páginas nuevas (4-sep-2026)
+
+Contexto: Mayprotec tenía una contradicción interna sin resolver, marcada como PENDIENTE en el sprint del 26-ago-2026 (ver abajo): el home decía "polipropileno" + "1 año" de garantía, mientras la landing de gatos decía "2.5mm" + "5 años". Sergio confirmó datos reales de 4 variantes material/color con precios (nylon poliamida transparente, polietileno multifilamento en blanco/beige/negro), y se ejecutó un plan de corrección en 5 fases.
+
+**Fase 1 — Corrección global de material/garantía** (reemplaza "polipropileno" → "nylon poliamida o polietileno multifilamento" y "1 año" → "hasta 10 años" / "7 a 10 años según el material" en todo el sitio):
+- `src/components/home/Hero.astro`, `Benefits.astro`, `WhyUs.astro`, `Process.astro`, `FAQ.astro`, `InstalacionSeguridad.astro` — textos de material y garantía corregidos.
+- `src/pages/index.astro` (meta description), `nosotros.astro`, `servicios.astro` — mismos textos corregidos.
+- `src/pages/servicios/malla-para-gatos-barranquilla.astro` — **revierte la dirección del sprint del 26-ago-2026** que había cambiado "polietileno" → "polipropileno" en esta página; ahora dice "polietileno multifilamento o nylon poliamida", calibre "1,0 a 1,7 mm según variante" (antes "2.5 mm"), garantía "7 a 10 años según el material" (antes "5 años"). Ya no hay contradicción entre home y landing gatos.
+- `src/content/blog/como-elegir-malla-seguridad-balcon.md` y `mallas-de-seguridad-para-gatos-guia-completa.md` — reescritas las secciones que argumentaban "el polipropileno es superior"; ahora presentan las dos familias de material sin declarar un "mejor" universal, y enlazan a `/precios/`.
+
+**Fase 2 — Reconstrucción de `/precios/`** (`src/pages/precios.astro`): cambio de modelo de datos completo, de precio-por-tamaño-de-balcón a precio-por-material/color. El array `precios` ahora tiene las 4 variantes reales (nylon transparente $45.900, polietileno blanco $49.900 — marcado "Más solicitado" por ser el más económico de los 3 polietileno —, beige claro y negro $55.900, COP/m² instalado). Tarjetas rediseñadas con swatch de color + calibre + resistencia declarada (hedged, nunca "certificada") + garantía + precio/m². CTA final cambiado a "Enviar fotos y calcular mi instalación". JSON-LD: `Service` con 4 `Offer` (`UnitPriceSpecification` en COP/m², `additionalProperty` con Material/Calibre/Color/Resistencia declarada/Garantía).
+
+**Fase 3 — Trabajo seguro en alturas**:
+- `src/pages/nosotros.astro` — nueva sección corta y comercial después de "Nuestros valores", menciona la Resolución 4272 de 2021 del Ministerio del Trabajo (nunca "certificados por el Ministerio del Trabajo" — el Ministerio regula, la certificación la dan los centros de formación autorizados).
+- Nuevo componente `src/components/home/SafeHeights.astro` — resumen compacto de la misma idea, insertado en `index.astro` entre `<WhyUs />` y `<Process />`, con link a `/nosotros`.
+
+**Fase 4 — 3 páginas de servicio nuevas** (mismo patrón visual que `malla-para-gatos-barranquilla.astro`: hero+bullets+CTA+imagen → "Por qué" → copy SEO → "Zonas de instalación" → proceso 4 pasos → "Servicios relacionados" con `ServiceCard.astro` real → CTA final):
+- `src/pages/servicios/mallas-para-canchas-deportivas-barranquilla.astro` — enfoque comercial/deportivo (contención de balón, cerramientos laterales/superiores, protección de espectadores y propiedades vecinas). Sin publicar cifras 190/290 kg/m² (no confirmadas para uso deportivo) — solo lenguaje cualitativo.
+- `src/pages/servicios/mallas-de-proteccion-comercial-barranquilla.astro` — bodegas, mezzanines, zonas restringidas, presupuesto empresarial. Sí cita polietileno multifilamento / 290 kg/m² (contexto estructural similar a un balcón).
+- `src/pages/servicios/mallas-antipalomas-barranquilla.astro` — recomienda nylon poliamida transparente (7 años, bajo impacto visual), solo exclusión física (nunca "elimina enfermedades" ni "acaba definitivamente con las palomas").
+- CTA unificado en las 3: "Calcula tu instalación" (deliberadamente distinto del CTA de Ideatecny, "Solicita evaluación del espacio", para diferenciar los dos sitios).
+- `src/pages/servicios.astro` — 3 tarjetas nuevas agregadas al array `services`.
+
+**Fase 5 — JSON-LD**: `Service` + `BreadcrumbList` + `additionalProperty` (Material/Calibre/Color/Resistencia declarada/Garantía) ya incluidos directamente en cada página nueva de la Fase 4. En `src/pages/index.astro`, `serviceSchema.offers` — el `priceRange: "200000-600000"` (atado al modelo de precio-por-tamaño ya descartado) se reemplazó por un array de 4 `Offer` con `UnitPriceSpecification` en COP/m², igual que `/precios/`.
+
+**Correcciones adicionales encontradas en la verificación** (no listadas explícitamente en el plan original, pero necesarias por consistencia):
+- `src/components/home/FAQ.astro` — la respuesta de "¿Cuánto cuesta...?" todavía citaba el rango viejo por tamaño de balcón ($200.000–$600.000); se actualizó a los precios por m² del nuevo modelo.
+- El grep de verificación de `certificad` encontró sobrevivientes con la palabra "certificada"/"certificados" referida a material (no al documento "certificado de instalación" ni a "instaladores certificados", que sí se dejaron intactos): `Hero.astro` ("Instalación certificada" → "Instalación profesional"), `InstallTypes.astro` ("Protección invisible y certificada" → "...y de alta resistencia"), meta description de `malla-para-ninos-barranquilla.astro` ("materiales certificados" → "materiales de alta resistencia") y paso 4 del proceso en `malla-para-gatos-barranquilla.astro` ("con materiales certificados" → "con materiales de alta resistencia"). Ninguna de estas páginas estaba en el plan explícito, pero la regla no-negociable de "nunca certificada" aplica a todo el sitio.
+
+**Verificado**: `malla-para-perros-barranquilla.astro` no tiene texto de material/garantía propio — se dejó completamente intacto para proteger su ranking en GSC (~pos 4.25).
+
+**Build**: `astro build` OK, 20 páginas generadas (17 anteriores + 3 nuevas). Greps de verificación (`polipropileno`, `1 año`, `5 años`, `certificad`) limpios tras las correcciones — los únicos "5 años" restantes son "más de 5 años de experiencia" (`nosotros.astro`, antigüedad de la empresa, no de material) y "0-5 años" (edad de niños en la FAQ de `malla-para-ninos-barranquilla.astro`), ninguno relacionado con garantía de producto.
+
+**Judgment calls / sin confirmar**: no hay fotografía real de canchas deportivas, bodegas ni un primer plano de instalación antipalomas en `public/images/` — las 3 páginas nuevas reutilizan fotos genéricas ya existentes (`proceso.jpg`, `equipo.jpg`, `galeria-6.jpg`) en vez de descargar stock nuevo (una descarga de archivo externo requiere permiso explícito que no se solicitó). Las fotos `public/images/Nylon Poliamida...jpeg` y `Polietileno...jpeg` (subidas el mismo día) son fotos de referencia informal (mano sobre piso de baldosa) — no se usaron en `/precios/` por no tener calidad de foto de producto; se mantuvo el swatch de color sólido (`colorHex`) tal como pedía el plan.
+
 ### Sprint: Validación auditoría UX/UI externa + CLS/typography fixes (30-ago-2026, OpenCode)
 Revisión cruzada de la auditoría UI/UX de Mayprotec contra el código real (local + prod). La mayoría de "hallazgos" ya estaban corregidos en el sprint UI/UX P0+P1 del mismo día (ver arriba). **La auditoría tenía errores factuales**: (a) el logo NUNCA estuvo roto — es un componente `Logo.astro` con wordmark SVG vectorial; el "corte" en móvil era el estado previo al sprint de la mañana; (b) el footer es `bg-brand-dark` con logo claro (no tarjeta blanca); (c) no hay overflow-x ni 9 tarjetas (son 6, agrupadas por espacio/necesidad desde P1).
 
@@ -173,10 +208,16 @@ Auditoría de bluejay (ChatGPT) confirmó que la landing de gatos no seguía el 
 Commit `94799df`, deploy `f5966ebb.mayprotec.pages.dev` (build+deploy success, verificado).
 
 **PENDIENTE para Sergio** (necesarios para P0/P1 completos, no inventar — el blueprint lo prohíbe):
-- Teléfono real `[TELEFONO]`, número WhatsApp `[WHATSAPP_NUM]` y dirección `[DIRECCION]` (aún placeholders en código en `BaseLayout.astro`, `Footer.astro`, `contacto`, `LeadModal`, `ContactForm`, `leads.ts`).
-- Confirmar garantía REAL: Home dice "1 año" (Hero/Benefits/Process/FAQ) vs landing gatos "5 años en tensado y anclajes". Alinear.
-- Validar claims: "+150 familias" (Hero), "más de 5 años" (WhyUs), "+45 reseñas / 5.0" (Testimonials), "Instalación disponible hoy". El testimonio de "Manga" es de Cartagena → reubicar/eliminar para hiperlocal Barranquilla.
+- Teléfono real `[TELEFONO]`, número WhatsApp `[WHATSAPP_NUM]` y dirección `[DIRECCION]` (revisar si siguen como placeholder en `Footer.astro`, `contacto`, `LeadModal`, `ContactForm`, `leads.ts`; `BaseLayout.astro` ya tiene un teléfono real `+573024249707`).
+- ~~Confirmar garantía REAL: Home dice "1 año" (Hero/Benefits/Process/FAQ) vs landing gatos "5 años en tensado y anclajes". Alinear.~~ **RESUELTO (4-sep-2026)**: se confirmó la matriz real de 4 materiales/colores, cada uno con su propia garantía (nylon poliamida transparente → 7 años; polietileno multifilamento blanco/beige/negro → 10 años). Regla nueva para todo el sitio: en textos genéricos usar "hasta 10 años" o "7 a 10 años según el material"; solo citar la garantía exacta de una variante puntual en `/precios/` y en las páginas donde ya se especifica el material (gatos, antipalomas). Nunca volver a escribir "1 año" fijo ni "5 años" fijo como garantía única.
+- Validar claims: "+150 familias" (Hero), "más de 5 años" (WhyUs/nosotros), "+45 reseñas / 5.0" (Testimonials), "Instalación disponible hoy". El testimonio de "Manga" es de Cartagena → reubicar/eliminar para hiperlocal Barranquilla.
 - Datos de GBP (Google Business Profile) si aplica para SEO local paralelo.
+- Confirmar con el proveedor el **calibre exacto del nylon** (hoy se usa "~1,0 mm" como cifra aproximada y hedged, no exacta ni certificada).
+- Confirmar el **alcance exacto de la garantía**: ¿cubre solo tensado y anclajes, o también el material en sí? ¿Qué la anula?
+- Confirmar **qué incluye el precio por m²** de `/precios/` (¿anclajes, visita técnica, IVA?).
+- Confirmar si existe un **mínimo de m² facturable** por visita/instalación.
+- Confirmar el **origen y la validez de las cifras 190/290 kg/m²** (¿datasheet del proveedor de malla? ¿ensayo propio?) — hasta entonces seguir usando "resistencia declarada y probada", nunca "certificada".
+- Confirmar si esas mismas cifras (190/290 kg/m²) **aplican a canchas deportivas y bodegas/comercios**, o si esos usos requieren un material o especificación distinta — por eso `mallas-para-canchas-deportivas-barranquilla.astro` hoy solo usa lenguaje cualitativo, sin cifras.
 
 ## Development
 

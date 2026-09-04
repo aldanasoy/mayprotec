@@ -1,0 +1,266 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceCard from '../../components/home/ServiceCard.astro';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://mallas-barranquilla.com" },
+      { "@type": "ListItem", "position": 2, "name": "Servicios", "item": "https://mallas-barranquilla.com/servicios" },
+      { "@type": "ListItem", "position": 3, "name": "Mallas para canchas deportivas", "item": "https://mallas-barranquilla.com/servicios/mallas-para-canchas-deportivas-barranquilla" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Instalación de mallas para canchas deportivas en Barranquilla",
+    "serviceType": "Cerramientos deportivos y contención de balones",
+    "description": "Instalación de mallas de contención para canchas de fútbol, fútbol sintético y polideportivos en Barranquilla y el Atlántico. Cerramientos laterales y superiores, cotización por dimensiones y altura.",
+    "areaServed": [
+      { "@type": "City", "name": "Barranquilla" },
+      { "@type": "State", "name": "Atlántico" }
+    ],
+    "provider": { "@type": "HomeAndConstructionBusiness", "name": "Mayprotec", "url": "https://mallas-barranquilla.com" },
+    "url": "https://mallas-barranquilla.com/servicios/mallas-para-canchas-deportivas-barranquilla",
+    "offers": { "@type": "Offer", "priceCurrency": "COP", "description": "Cotización según dimensiones y altura, sin compromiso" },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Instalación de cerramientos deportivos",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cerramiento lateral para cancha deportiva" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cerramiento superior y contención de balones" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mantenimiento y reemplazo de malla por secciones" } }
+      ]
+    },
+    "additionalProperty": [
+      { "@type": "PropertyValue", "name": "Material", "value": "Malla de alta resistencia para uso deportivo, calibre y sistema de anclaje definidos según las dimensiones y el deporte" },
+      { "@type": "PropertyValue", "name": "Uso", "value": "Cerramiento perimetral para canchas de fútbol, fútbol sintético y polideportivos" }
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title="Mallas para Canchas Deportivas en Barranquilla | Mayprotec"
+  description="Instalación de mallas de contención para canchas de fútbol, fútbol sintético y polideportivos en Barranquilla. Cerramientos laterales y superiores. Calcula tu instalación."
+  canonical="https://mallas-barranquilla.com/servicios/mallas-para-canchas-deportivas-barranquilla/"
+  ogImage="/images/proceso.jpg"
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="py-20 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <a href="/" class="inline-flex items-center gap-1.5 text-sm font-medium text-ink-400 hover:text-brand-dark transition-colors mb-6">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          Volver al inicio
+        </a>
+        <span class="section-label">Protección deportiva y comercial</span>
+        <h1 class="font-display font-bold text-3xl md:text-5xl text-ink mt-3 leading-tight">
+          Mallas para Canchas Deportivas<br />
+          <span class="text-brand-dark">en Barranquilla</span>
+        </h1>
+        <p class="text-ink-600 mt-5 leading-relaxed">
+          Instalamos cerramientos de contención para canchas de fútbol, fútbol sintético y
+          polideportivos en Barranquilla y el Atlántico. Cerramientos laterales y superiores
+          que contienen el balón, protegen a espectadores y luminarias, y cuidan las
+          propiedades vecinas.
+        </p>
+        <ul class="mt-6 space-y-2.5">
+          {[
+            'Cerramientos laterales y superiores para contener el balón',
+            'Protección de espectadores, luminarias y propiedades vecinas',
+            'Cotización por dimensiones y altura, no por estimado genérico',
+            'Mantenimiento y reemplazo por secciones sin detener la cancha',
+          ].map(f => (
+            <li class="flex items-start gap-2.5 text-sm text-ink-700">
+              <svg class="mt-0.5 flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B9C85" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              {f}
+            </li>
+          ))}
+        </ul>
+        <div class="flex flex-wrap gap-4 mt-8">
+          <button data-open-lead-modal data-modal-location="servicio-canchas" class="btn-primary cursor-pointer">Calcula tu instalación</button>
+          <a href="/#contacto" class="btn-secondary">Ir al formulario de contacto</a>
+        </div>
+      </div>
+      <figure class="relative hidden lg:block">
+        <div class="rounded-3xl overflow-hidden shadow-2xl">
+          <img src="/images/proceso.jpg" alt="Técnicos de Mayprotec instalando malla de seguridad de alta resistencia en Barranquilla" class="w-full h-[480px] object-cover" loading="eager" fetchpriority="high" decoding="async" />
+        </div>
+        <figcaption class="mt-4 text-xs text-ink-400 text-center">Instalación de cerramientos de alta resistencia en Barranquilla</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Por qué -->
+  <section class="py-16 md:py-20 bg-ink-200/30">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="section-label">Seguridad deportiva</span>
+        <h2 class="section-title mx-auto mt-2">¿Por qué tu cancha necesita un cerramiento?</h2>
+        <p class="section-subtitle mx-auto mt-4 text-center">
+          Una cancha sin un cerramiento adecuado interrumpe el juego, pone en riesgo a las
+          personas alrededor y genera conflictos con vecinos y propiedades cercanas.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {[
+          { t: 'Contención real del balón', d: 'Evita que el balón salga constantemente de la cancha y dañe carros, ventanas o propiedades vecinas.' },
+          { t: 'Seguridad para espectadores', d: 'Protege graderías, zonas de paso y luminarias de impactos durante los partidos y entrenamientos.' },
+          { t: 'Buena vecindad', d: 'Reduce los conflictos con vecinos y propiedades colindantes por balones fuera de la cancha.' },
+        ].map(c => (
+          <div class="bg-white rounded-3xl p-7 border border-ink-200/60">
+            <h3 class="font-display font-bold text-lg text-ink mb-2">{c.t}</h3>
+            <p class="text-sm text-ink-600 leading-relaxed">{c.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Copy SEO -->
+  <section class="py-16 md:py-20 bg-white" id="mallas-canchas-barranquilla">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <span class="section-label">Cerramientos deportivos</span>
+        <h2 class="section-title mx-auto mt-2">Cerramientos para fútbol, fútbol sintético y polideportivos</h2>
+      </div>
+      <div class="space-y-6 text-ink-600 leading-relaxed text-base md:text-lg">
+        <p>
+          Si administras una cancha de fútbol, fútbol sintético o un polideportivo en Barranquilla,
+          un cerramiento de contención bien instalado evita que el balón salga constantemente de
+          la cancha, dañe vehículos o ventanas, y ponga en riesgo a los espectadores. Instalamos
+          <strong>cerramientos laterales y superiores</strong> diseñados para cada cancha: altura
+          y extensión según el tipo de juego, ubicación de graderías y cercanía a zonas
+          residenciales o vías.
+        </p>
+        <p>
+          El proceso siempre empieza con una <strong>medición en sitio</strong>. Evaluamos las
+          dimensiones exactas de la cancha, la altura necesaria para contener el balón según el
+          deporte, la ubicación de luminarias y postes, y cualquier propiedad vecina que debamos
+          proteger. Con esa información entregamos una <strong>cotización por dimensiones y
+          altura</strong>, ajustada al proyecto real y no a un estimado genérico.
+        </p>
+        <p>
+          También separamos <strong>zonas de juego</strong> dentro de un mismo complejo deportivo
+          — por ejemplo, entre una cancha de fútbol y un área de espectadores o una cancha auxiliar
+          — para que el balón de un partido no interrumpa el que se juega al lado.
+        </p>
+        <p>
+          A diferencia de una instalación residencial, un cerramiento deportivo recibe impactos
+          constantes y está expuesto muchas horas al sol y la lluvia del Caribe. Por eso ofrecemos
+          <strong>mantenimiento y reemplazo por secciones</strong>: si una parte de la malla se
+          desgasta o sufre un impacto fuerte, no es necesario cambiar todo el cerramiento, solo la
+          sección afectada.
+        </p>
+        <p>
+          Atendemos clubes, colegios, conjuntos residenciales, coliseos y complejos deportivos
+          privados en Barranquilla y el Atlántico.
+        </p>
+      </div>
+      <div class="mt-8 text-center">
+        <button data-open-lead-modal data-modal-location="servicio-canchas-copy" class="btn-primary cursor-pointer">Calcula tu instalación</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zonas de instalación -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="section-label">Dónde la instalamos</span>
+        <h2 class="section-title mx-auto mt-2">Canchas, coliseos y polideportivos</h2>
+        <p class="section-subtitle mx-auto mt-4 text-center">
+          Adaptamos el cerramiento al tipo de cancha, al deporte y al espacio disponible alrededor.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {[
+          { t: 'Canchas de fútbol y fútbol sintético', d: 'Cerramientos perimetrales laterales y superiores según el tipo de cancha y su uso.' },
+          { t: 'Coliseos y polideportivos', d: 'Separación de zonas de juego y protección de graderías en complejos deportivos cubiertos o al aire libre.' },
+          { t: 'Canchas de conjuntos y colegios', d: 'Soluciones para canchas comunitarias, colegios y clubes con presupuesto y mantenimiento definidos.' },
+        ].map(c => (
+          <div class="bg-brand-50 rounded-3xl p-7 border border-brand/20">
+            <h3 class="font-display font-bold text-lg text-brand-dark mb-2">{c.t}</h3>
+            <p class="text-sm text-ink-600 leading-relaxed">{c.d}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-center text-sm text-ink-500 mt-10">
+        Atendemos clubes, colegios, conjuntos residenciales y complejos deportivos en Barranquilla
+        y municipios del Atlántico como Soledad, Puerto Colombia y Malambo.
+      </p>
+    </div>
+  </section>
+
+  <!-- Proceso -->
+  <section class="py-16 md:py-20 bg-ink-200/30">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="section-label">Cómo trabajamos</span>
+        <h2 class="section-title mx-auto mt-2">De la medición a la instalación</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          { n: '1', t: 'Contacto', d: 'Nos cuentas el tipo de cancha, el deporte y si hay zonas o propiedades vecinas que proteger.' },
+          { n: '2', t: 'Visita técnica', d: 'Medimos dimensiones exactas, altura necesaria y ubicación de luminarias y graderías.' },
+          { n: '3', t: 'Cotización', d: 'Recibes un presupuesto por dimensiones y altura, claro y por escrito.' },
+          { n: '4', t: 'Instalación', d: 'Instalamos el cerramiento perimetral con anclajes reforzados para uso deportivo constante.' },
+        ].map(s => (
+          <div class="bg-white rounded-3xl p-6 border border-ink-200/60">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-brand-dark text-white font-bold">{s.n}</span>
+            <h3 class="font-semibold text-ink mt-4">{s.t}</h3>
+            <p class="text-sm text-ink-600 mt-2 leading-relaxed">{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios relacionados -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="section-label">También te puede interesar</span>
+        <h2 class="section-title mx-auto mt-2">Otras soluciones de protección</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <ServiceCard
+          title="Mallas de protección comercial"
+          desc="Bodegas, depósitos y zonas restringidas: cerramientos y protección de mercancía adaptados a la operación de tu negocio."
+          img="/images/equipo.jpg"
+          alt="Equipo de Mayprotec instalando malla de protección comercial en Barranquilla"
+          href="/servicios/mallas-de-proteccion-comercial-barranquilla"
+        />
+        <ServiceCard
+          title="Mallas antipalomas"
+          desc="Exclusión física de aves en fachadas, aleros y ductos, sin lastimarlas. Instalación discreta con nylon transparente."
+          img="/images/galeria-6.jpg"
+          alt="Malla antipalomas instalada en balcón de edificio en Barranquilla"
+          href="/servicios/mallas-antipalomas-barranquilla"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 text-center bg-brand-50 rounded-3xl p-8 md:p-12 border border-brand/20">
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-ink mb-3">
+        Protege tu cancha antes del próximo partido
+      </h2>
+      <p class="text-ink-600 mb-6 max-w-xl mx-auto">
+        Solicita hoy la visita técnica y calcula tu instalación según las medidas reales de tu
+        cancha en Barranquilla.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <button data-open-lead-modal data-modal-location="servicio-canchas-cta" class="btn-primary cursor-pointer">Calcula tu instalación</button>
+        <a href="/servicios" class="btn-secondary">Ver todos los servicios</a>
+        <a href="/" class="btn-secondary">Volver al inicio</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

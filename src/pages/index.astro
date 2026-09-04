@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/home/Hero.astro';
 import Benefits from '../components/home/Benefits.astro';
 import WhyUs from '../components/home/WhyUs.astro';
+import SafeHeights from '../components/home/SafeHeights.astro';
 import InstalacionSeguridad from '../components/home/InstalacionSeguridad.astro';
 import InstallTypes from '../components/home/InstallTypes.astro';
 import Process from '../components/home/Process.astro';
@@ -33,6 +34,14 @@ const breadcrumbSchema = {
   ]
 };
 
+// Precios por material — misma matriz que /precios/
+const materiales = [
+  { material: 'Nylon poliamida', calibre: '~1,0 mm', color: 'Transparente', resistenciaKg: '190', garantia: '7 años', precio: 45900 },
+  { material: 'Polietileno multifilamento', calibre: '1,7 mm', color: 'Blanco', resistenciaKg: '290', garantia: '10 años', precio: 49900 },
+  { material: 'Polietileno multifilamento', calibre: '1,7 mm', color: 'Beige claro', resistenciaKg: '290', garantia: '10 años', precio: 55900 },
+  { material: 'Polietileno multifilamento', calibre: '1,7 mm', color: 'Negro', resistenciaKg: '290', garantia: '10 años', precio: 55900 },
+];
+
 // Service Schema
 const serviceSchema = {
   "@context": "https://schema.org",
@@ -42,19 +51,32 @@ const serviceSchema = {
   "provider": { "@type": "LocalBusiness", "name": "Mayprotec", "url": siteUrl },
   "areaServed": { "@type": "City", "name": "Barranquilla" },
   "serviceType": "Instalación de mallas de seguridad",
-  "offers": {
+  "offers": materiales.map(m => ({
     "@type": "Offer",
+    "name": `Malla de ${m.material} — ${m.color}`,
     "priceCurrency": "COP",
-    "priceRange": "200000-600000",
     "availability": "https://schema.org/InStock",
-    "areaServed": "Barranquilla, Colombia"
-  }
+    "areaServed": "Barranquilla, Colombia",
+    "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": m.precio,
+      "priceCurrency": "COP",
+      "unitText": "m2"
+    },
+    "additionalProperty": [
+      { "@type": "PropertyValue", "name": "Material", "value": m.material },
+      { "@type": "PropertyValue", "name": "Calibre", "value": m.calibre },
+      { "@type": "PropertyValue", "name": "Color", "value": m.color },
+      { "@type": "PropertyValue", "name": "Resistencia declarada", "value": `hasta ${m.resistenciaKg} kg/m² en el sistema instalado` },
+      { "@type": "PropertyValue", "name": "Garantía", "value": m.garantia }
+    ]
+  }))
 };
 ---
 
 <BaseLayout
   title="Mallas para Balcones en Barranquilla | Mayprotec — Instalación Profesional"
-  description="Instala mallas de seguridad para balcones, ventanas y terrazas en Barranquilla. Protege a niños y mascotas. Material anti-UV. Garantía 1 año. Cotización gratis."
+  description="Instala mallas de seguridad para balcones, ventanas y terrazas en Barranquilla. Protege a niños y mascotas. Material anti-UV. Garantía hasta 10 años. Cotización gratis."
   schema={[faqSchema, breadcrumbSchema, serviceSchema]}
 >
   <Hero />
@@ -62,6 +84,7 @@ const serviceSchema = {
   <InstallTypes />
   <Gallery />
   <WhyUs />
+  <SafeHeights />
   <Process />
   <Testimonials />
   <FAQ />
