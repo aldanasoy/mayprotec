@@ -69,6 +69,6 @@ Solo útiles si el problema es la altura de la baranda existente.
 
 ## ¿Necesitas protección para tus hijos?
 
-En Mayprotec instalamos mallas de seguridad diseñadas específicamente para proteger a niños en balcones y ventanas de apartamentos en Barranquilla. Materiales suaves, apertura pequeña y sistemas de anclaje certificados.
+En Mayprotec instalamos **[malla de seguridad para niños](/servicios/malla-para-ninos-barranquilla/)** diseñada específicamente para proteger a tus hijos en balcones y ventanas de apartamentos en Barranquilla. Materiales suaves, apertura pequeña y sistemas de anclaje certificados.
 
-**[Solicita una cotización gratuita](/)** — visitamos tu hogar y te recomendamos la mejor solución para tu caso específico.
+**[Solicita una cotización gratuita](/servicios/malla-para-ninos-barranquilla/)** — visitamos tu hogar y te recomendamos la mejor solución para tu caso específico.

@@ -74,4 +74,4 @@ Depende del material: una malla de nylon poliamida correctamente instalada tiene
 
 ## ¿Necesitas mallas para tus gatos?
 
-¿Tienes gatos y vives en un apartamento en Barranquilla? **[Contacta a Mayprotec](/)** para una cotización sin compromiso. Instalamos mallas especialmente diseñadas para mascotas con materiales de alta resistencia y garantía de hasta 10 años según el material.
+¿Tienes gatos y vives en un apartamento en Barranquilla? Solicita una cotización sin compromiso para tu **[malla para gatos en Barranquilla](/servicios/malla-para-gatos-barranquilla/)**. Instalamos mallas especialmente diseñadas para mascotas con materiales de alta resistencia y garantía de hasta 10 años según el material.

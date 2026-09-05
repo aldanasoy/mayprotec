@@ -29,7 +29,7 @@ const { title, desc, img, alt, href, tag } = Astro.props;
   </div>
   <div class="p-6 flex flex-col flex-1">
     <h3 class="font-display font-bold text-lg text-ink mb-2 group-hover:text-brand-dark transition-colors">
-      {title}
+      <a href={href}>{title}</a>
     </h3>
     <p class="text-sm text-ink-600 leading-relaxed">{desc}</p>
     <a

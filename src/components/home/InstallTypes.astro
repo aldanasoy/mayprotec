@@ -31,7 +31,7 @@ const porEspacio = [
 ];
 const porNecesidad = [
   {
-    title: 'Protección para niños',
+    title: 'Mallas para niños',
     desc: 'Mallas y barandas anti caídas para balcones, ventanas y escaleras. Protección invisible y de alta resistencia.',
     img: '/images/malla-ninos.jpg',
     alt: 'Malla de seguridad para niños anti caídas en balcón de Barranquilla',
@@ -39,17 +39,17 @@ const porNecesidad = [
     href: '/servicios/malla-para-ninos-barranquilla',
   },
   {
-    title: 'Protección para gatos',
+    title: 'Mallas para gatos',
     desc: 'Anti caídas para felinos en balcones, ventanas y terrazas. Material resistente a garras con tensado firme.',
-    img: '/images/malla-gatos.jpg',
+    img: '/images/malla-gatos.png',
     alt: 'Malla de seguridad para gatos instalada en ventana de apartamento en Barranquilla',
     tag: null,
     href: '/servicios/malla-para-gatos-barranquilla',
   },
   {
-    title: 'Protección para perros',
+    title: 'Mallas para perros',
     desc: 'Mallas reforzadas para perros medianos y grandes en balcones, terrazas y patios.',
-    img: '/images/malla-perros.jpg',
+    img: '/images/malla-perros.png',
     alt: 'Malla de seguridad para perros en balcón de casa en Barranquilla',
     tag: null,
     href: '/servicios/malla-para-perros-barranquilla',
@@ -79,7 +79,7 @@ const porNecesidad = [
       </h3>
       <div class="grid md:grid-cols-3 gap-6">
         {porEspacio.map((t, i) => (
-          <div class={`aos aos-delay-${(i % 3) + 1} h-full`}>
+          <div id={['balcones', 'ventanas', 'terrazas'][i]} class={`aos aos-delay-${(i % 3) + 1} h-full scroll-mt-24`}>
             <ServiceCard title={t.title} desc={t.desc} img={t.img} alt={t.alt} href={t.href} tag={t.tag} />
           </div>
         ))}

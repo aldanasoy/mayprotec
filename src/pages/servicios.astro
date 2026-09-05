@@ -6,7 +6,7 @@ const services = [
     href: '/servicios/malla-para-gatos-barranquilla',
     title: 'Malla de seguridad para gatos',
     desc: 'Evita caídas de felinos en balcones y ventanas de apartamentos. Malla de polietileno multifilamento o nylon poliamida, resistente a garras, con tensado firme y anclajes seguros.',
-    img: '/images/malla-gatos.jpg',
+    img: '/images/malla-gatos.png',
     alt: 'Gato mirando por la ventana, protegido con malla de seguridad en Barranquilla',
     tag: 'Mascotas',
     keyword: 'malla para gatos en Barranquilla',
@@ -15,7 +15,7 @@ const services = [
     href: '/servicios/malla-para-perros-barranquilla',
     title: 'Malla de seguridad para perros',
     desc: 'Protege a tu perro en terrazas, balcones y jardines. Mallas reforzadas pensadas para mascotas medianas y grandes, incluso razas activas.',
-    img: '/images/malla-perros.jpg',
+    img: '/images/malla-perros.png',
     alt: 'Perro en el balcón de un apartamento, protegido con malla de seguridad',
     tag: 'Mascotas',
     keyword: 'malla para perros en Barranquilla',
@@ -57,7 +57,7 @@ const services = [
     keyword: 'mallas antipalomas en Barranquilla',
   },
   {
-    href: '/#tipos',
+    href: '/#balcones',
     title: 'Mallas para balcones',
     desc: 'La instalación más solicitada. Cubrimos toda la abertura del balcón con malla tensada, fijada a la estructura sin perforar paredes externas.',
     img: '/images/espacio-balcon.jpg',
@@ -66,7 +66,7 @@ const services = [
     keyword: 'mallas para balcones',
   },
   {
-    href: '/#tipos',
+    href: '/#ventanas',
     title: 'Mallas para ventanas',
     desc: 'Protección para ventanas de cualquier tamaño. Ideal para apartamentos en pisos altos donde los niños pequeños o mascotas pueden asomarse.',
     img: '/images/espacio-ventana.jpg',
@@ -75,7 +75,7 @@ const services = [
     keyword: 'mallas para ventanas',
   },
   {
-    href: '/#tipos',
+    href: '/#terrazas',
     title: 'Mallas para terrazas y jardines',
     desc: 'Terrazas de casas y penthouses con sistemas de tensado perimetral, y protección perimetral para jardines y áreas de juego.',
     img: '/images/espacio-terraza.jpg',
@@ -119,7 +119,7 @@ const schema = [
       "@type": "ListItem",
       "position": i + 1,
       "name": s.keyword,
-      "url": s.href.startsWith('/#') ? 'https://mallas-barranquilla.com/' : `https://mallas-barranquilla.com${s.href}`
+      "url": `https://mallas-barranquilla.com${s.href}`
     }))
   }
 ];
@@ -178,10 +178,10 @@ const schema = [
               </h2>
               <p class="text-sm text-ink-600 leading-relaxed">{s.desc}</p>
               <a
-                href={s.href.startsWith('/#') ? '/' : s.href}
+                href={s.href}
                 class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand-dark transition-colors"
               >
-                {s.href.startsWith('/#') ? 'Conocer más desde el inicio' : `Ver ${s.title.toLowerCase()}`}
+                {`Ver ${s.title.toLowerCase()}`}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
             </div>
@@ -202,7 +202,7 @@ const schema = [
         balcón, ventana o terraza en Barranquilla. La cotización y la visita técnica son gratuitas.
       </p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="/#contacto" class="btn-primary">Hablar con un asesor</a>
+        <a href="/contacto" class="btn-primary">Hablar con un asesor</a>
         <a href="/" class="btn-secondary">Volver al inicio</a>
       </div>
     </div>

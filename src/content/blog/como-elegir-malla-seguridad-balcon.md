@@ -68,4 +68,4 @@ Aunque existen kits para instalar mallas por tu cuenta, recomendamos siempre con
 
 ## ¿Necesitas asesoría personalizada?
 
-Si estás en Barranquilla y quieres asesorarte sobre qué tipo de malla es mejor para tu balcón, ventana o terraza, **[contacta a Mayprotec](/)** para una visita técnica gratuita. Evaluamos tu espacio y te recomendamos la solución más adecuada.
+Si estás en Barranquilla y quieres asesorarte sobre qué tipo de malla es mejor para tu balcón, ventana o terraza, **[contacta a Mayprotec](/contacto/)** para una visita técnica gratuita. Evaluamos tu espacio y te recomendamos la solución más adecuada.
