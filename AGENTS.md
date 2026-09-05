@@ -23,6 +23,23 @@ Este proyecto participa en el sistema multi-agente Arcoso (Hermes + OpenCode + C
 
 ## Historial
 
+### Sprint: Agente de voz "Mallas Colombia" (Retell AI + Telnyx) (5-sep-2026)
+
+Contexto: Sergio compró el número de Telnyx +57 300 913 3684 para una línea telefónica **nacional** compartida entre Mayprotec, Ideatecny (mismos precios/materiales/garantía, ambos hoy en Barranquilla) y futuros sitios RNR de mallas en Cartagena, Santa Marta, Cali, Medellín y Bogotá. El agente se identifica como "Mallas Colombia" (nunca como una marca local), pregunta la ciudad primero por ser línea nacional, y captura datos para que el coordinador humano agende visita o envíe cotización.
+
+**Retell AI:**
+- Knowledge Base `knowledge_base_09a85a5cecc285be` — 7 documentos curados (materiales/precios, mascotas/niños, instalación/normativa, garantía/proceso, cobertura por ciudad, servicios, marca de la línea), extraídos y verificados contra `mallas-barranquilla.com` e `ideatecny.com` en vivo.
+- LLM `llm_28f0a8a223d53bb42cae0412d0ee` (gpt-5-mini, `es-419`, KB adjunta con `top_k:3, filter_score:0.5`) + Agente `agent_1731a249bc049e03ad65ce0d97` (voz `11labs-Cimo`, `interruption_sensitivity 0.3`, publicado v0), clonando la config técnica probada de Its Done Landscaping/RepararYa.
+- `post_call_analysis_data`: `ciudad` (nuevo, primera pregunta) + `nombre`, `phone`, `email`, `servicio`, `resumen`, `urgency`, `heard_from`, `is_spam`.
+
+**Telnyx:** FQDN connection `3042297591158014993` ("Retell SIP Trunk - MallasColombia") con FQDN hijo `sip.retellai.com:5060`, número +573009133684 asignado; importado a Retell con el esquema nuevo `inbound_agents` (el campo `inbound_agent_id` quedó deprecado el 2026-03-31).
+
+**Webhook nuevo:** [functions/api/retell-webhook.js](functions/api/retell-webhook.js) (Cloudflare Pages Function, adaptado del patrón de `kargusmoving-web`, sin bloque de Supabase). Reenvía a GestionaLeads (`env.GL_MAYPROTEC_WEBHOOK_URL`) y Telegram (`env.MAYPROTEC_TELEGRAM_BOT_TOKEN`/`_CHAT_ID`, con fallback a `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID`).
+
+**Pendiente (bloqueado en credenciales, no en código):** el webhook no tiene todavía las env vars server-side en Cloudflare Pages. `GL_MAYPROTEC_WEBHOOK_URL` se arma reusando el `GL_TOKEN` que ya existe en `src/config/leads.ts` con el sufijo `/lead/retell` (mismo patrón que usa RepararYa para separar leads web vs. llamada — ver `orquestacion-arcoso/AGENTS.md` Handoff 013); `MAYPROTEC_TELEGRAM_BOT_TOKEN`/`_CHAT_ID` reusan el bot `ManagitoBot`/chat `-5513637048` que ya usa el formulario web. Sin esto configurado en el dashboard de Cloudflare Pages, las llamadas se atienden bien pero el lead no llega a ningún lado. Falta también la llamada de prueba real una vez esté configurado.
+
+**Hallazgo de seguridad preexistente (no corregido en este sprint, fuera de alcance):** `src/config/leads.ts` tiene el bot de Telegram y el token de GestionaLeads embebidos en texto plano, y `ContactForm.astro`/`LeadModal.astro` los inyectan en un `<script>` del lado del cliente — cualquiera puede verlos con "ver código fuente" del sitio. El webhook nuevo de esta sprint SÍ usa variables de entorno server-side (nunca expuestas al navegador); valdría la pena migrar el formulario web al mismo patrón en un sprint futuro.
+
 ### Sprint: Corrección de materiales/garantías + páginas nuevas (4-sep-2026)
 
 Contexto: Mayprotec tenía una contradicción interna sin resolver, marcada como PENDIENTE en el sprint del 26-ago-2026 (ver abajo): el home decía "polipropileno" + "1 año" de garantía, mientras la landing de gatos decía "2.5mm" + "5 años". Sergio confirmó datos reales de 4 variantes material/color con precios (nylon poliamida transparente, polietileno multifilamento en blanco/beige/negro), y se ejecutó un plan de corrección en 5 fases.
