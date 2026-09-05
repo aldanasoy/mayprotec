@@ -65,43 +65,67 @@ const works = [
       </p>
     </div>
 
-    <!-- Grid -->
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-      {works.map((w, i) => (
-        <div
-          class:list={[
-            'group relative overflow-hidden rounded-2xl aspect-square bg-brand-50 aos',
-            i < 2 ? '' : 'aos-delay-1',
-          ]}
-        >
-          <img
-            src={w.img}
-            alt={w.alt}
-            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            loading="lazy"
-            decoding="async"
-            width="800"
-            height="800"
-          />
-          <!-- Overlay con metadata -->
-          <div class="absolute inset-0 bg-gradient-to-t from-ink-DEFAULT/85 via-ink-DEFAULT/20 to-transparent
-                      opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-            <div class="p-3.5 md:p-4 w-full">
-              <p class="text-white font-semibold text-sm leading-tight">{w.tipo}</p>
-              <p class="text-white/80 text-[11px] md:text-xs mt-0.5 flex items-center gap-1">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" class="flex-shrink-0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                {w.barrio}
-              </p>
-              <span class="inline-block mt-1.5 text-[10px] md:text-xs bg-white/15 backdrop-blur-sm text-white px-2 py-0.5 rounded-full">
-                {w.espacio}
-              </span>
-              <span class="inline-block mt-1.5 ml-1.5 text-[10px] md:text-xs bg-brand/90 text-white px-2 py-0.5 rounded-full">
-                {w.necesidad}
-              </span>
+    <!-- Carousel (mobile) / Grid (md:+) -->
+    <div class="relative">
+      <div
+        id="gallery-carousel"
+        class="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2
+               -mx-4 px-4 sm:mx-0 sm:px-0
+               md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:pb-0
+               [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {works.map((w, i) => (
+          <div
+            class:list={[
+              'group relative overflow-hidden rounded-2xl aspect-square bg-brand-50 aos snap-start shrink-0 w-[42vw] sm:w-[220px] md:w-auto',
+              i < 2 ? '' : 'aos-delay-1',
+            ]}
+          >
+            <img
+              src={w.img}
+              alt={w.alt}
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+              width="800"
+              height="800"
+            />
+            <!-- Overlay con metadata -->
+            <div class="absolute inset-0 bg-gradient-to-t from-ink-DEFAULT/85 via-ink-DEFAULT/20 to-transparent
+                        opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+              <div class="p-3.5 md:p-4 w-full">
+                <p class="text-white font-semibold text-sm leading-tight">{w.tipo}</p>
+                <p class="text-white/80 text-[11px] md:text-xs mt-0.5 flex items-center gap-1">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" class="flex-shrink-0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  {w.barrio}
+                </p>
+                <span class="inline-block mt-1.5 text-[10px] md:text-xs bg-white/15 backdrop-blur-sm text-white px-2 py-0.5 rounded-full">
+                  {w.espacio}
+                </span>
+                <span class="inline-block mt-1.5 ml-1.5 text-[10px] md:text-xs bg-brand/90 text-white px-2 py-0.5 rounded-full">
+                  {w.necesidad}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+      <button
+        type="button"
+        data-carousel-prev="gallery-carousel"
+        class="md:hidden flex items-center justify-center absolute left-1 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 shadow-lg border border-ink-200/60 text-ink-600 hover:text-brand-dark transition-colors z-10 cursor-pointer"
+        aria-label="Anterior"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button
+        type="button"
+        data-carousel-next="gallery-carousel"
+        class="md:hidden flex items-center justify-center absolute right-1 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 shadow-lg border border-ink-200/60 text-ink-600 hover:text-brand-dark transition-colors z-10 cursor-pointer"
+        aria-label="Siguiente"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
 
     <!-- CTA -->
@@ -118,4 +142,16 @@ const works = [
     </div>
   </div>
 </section>
+
+<script>
+// "Trabajos realizados" carousel (mobile only — grid returns at md:)
+const track = document.getElementById('gallery-carousel');
+const prevBtn = document.querySelector('[data-carousel-prev="gallery-carousel"]');
+const nextBtn = document.querySelector('[data-carousel-next="gallery-carousel"]');
+if (track) {
+  const cardStep = () => (track.firstElementChild as HTMLElement)?.getBoundingClientRect().width + 12 || 160;
+  prevBtn?.addEventListener('click', () => track.scrollBy({ left: -cardStep(), behavior: 'smooth' }));
+  nextBtn?.addEventListener('click', () => track.scrollBy({ left: cardStep(), behavior: 'smooth' }));
+}
+</script>
 

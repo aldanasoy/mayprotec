@@ -1,0 +1,64 @@
+---
+// BottomBar.astro — Barra inferior persistente mobile-only (NUEVA, Sprint 2).
+// Modelo UX tomado de la BottomBar de Ideatecny (fixed, spacer, auto-hide con teclado),
+// pero con la paleta verde propia de Mayprotec y el número leído de GBP (config/analytics.ts).
+import { GBP } from '../../config/analytics';
+const telHref = `tel:${GBP.phone}`;
+---
+
+<!-- Barra inferior persistente mobile-first, safe-area, oculta al enfocar un input (teclado) -->
+<div
+  id="bottom-bar"
+  class="no-print fixed bottom-0 left-0 right-0 z-40 bg-brand-dark border-t border-white/10 md:hidden"
+  style="padding-bottom: env(safe-area-inset-bottom);"
+  aria-label="Acciones rápidas"
+>
+  <div class="grid grid-cols-2 gap-2 p-2 max-w-[480px] mx-auto">
+    <button
+      type="button"
+      data-open-lead-modal
+      data-modal-location="bottom-bar"
+      class="inline-flex items-center justify-center gap-2 bg-brand hover:bg-brand-light text-white min-h-[44px] rounded-xl font-semibold text-sm transition-colors cursor-pointer"
+    >
+      <img src="/images/whatsapp-logo.svg" alt="" width="18" height="18" loading="lazy" />
+      WhatsApp
+    </button>
+    <a
+      href={telHref}
+      data-location="bottom-bar"
+      class="inline-flex items-center justify-center gap-2 bg-white hover:bg-brand-bg text-brand-dark min-h-[44px] rounded-xl font-semibold text-sm transition-colors"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.08a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      Llamar ahora
+    </a>
+  </div>
+</div>
+<div id="bottom-bar-spacer" class="h-[60px] md:hidden" aria-hidden="true" style="margin-bottom: env(safe-area-inset-bottom);"></div>
+
+<script is:inline>
+  (function(){
+    var bar = document.getElementById('bottom-bar');
+    var spacer = document.getElementById('bottom-bar-spacer');
+    if(!bar) return;
+    var hide = function(){ bar.style.transform='translateY(100%)'; bar.style.transition='transform 0.2s ease'; if(spacer) spacer.style.display='none'; };
+    var show = function(){ bar.style.transform=''; if(spacer) spacer.style.display=''; };
+    document.addEventListener('focusin', function(e){
+      var t=e.target;
+      if(t && (t.tagName==='INPUT' || t.tagName==='TEXTAREA' || t.tagName==='SELECT')) hide();
+    });
+    document.addEventListener('focusout', function(){
+      setTimeout(function(){
+        var ae=document.activeElement;
+        if(!ae || (ae.tagName!=='INPUT' && ae.tagName!=='TEXTAREA' && ae.tagName!=='SELECT')) show();
+      }, 100);
+    });
+    // Visual viewport handling for keyboard
+    if(window.visualViewport){
+      var lastH = window.visualViewport.height;
+      window.visualViewport.addEventListener('resize', function(){
+        if(window.visualViewport.height < lastH - 120) hide(); else show();
+        lastH = window.visualViewport.height;
+      });
+    }
+  })();
+</script>

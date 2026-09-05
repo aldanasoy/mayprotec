@@ -77,12 +77,36 @@ const porNecesidad = [
         <span class="w-6 h-0.5 bg-brand rounded-full" aria-hidden="true"></span>
         Por espacio
       </h3>
-      <div class="grid md:grid-cols-3 gap-6">
-        {porEspacio.map((t, i) => (
-          <div id={['balcones', 'ventanas', 'terrazas'][i]} class={`aos aos-delay-${(i % 3) + 1} h-full scroll-mt-24`}>
-            <ServiceCard title={t.title} desc={t.desc} img={t.img} alt={t.alt} href={t.href} tag={t.tag} />
-          </div>
-        ))}
+      <div class="relative">
+        <div
+          id="espacio-carousel"
+          class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2
+                 -mx-4 px-4 sm:mx-0 sm:px-0
+                 md:grid md:grid-cols-3 md:overflow-visible md:pb-0
+                 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {porEspacio.map((t, i) => (
+            <div id={['balcones', 'ventanas', 'terrazas'][i]} class={`aos aos-delay-${(i % 3) + 1} snap-start shrink-0 w-[84vw] sm:w-[360px] md:w-auto h-full scroll-mt-24`}>
+              <ServiceCard title={t.title} desc={t.desc} img={t.img} alt={t.alt} href={t.href} tag={t.tag} />
+            </div>
+          ))}
+        </div>
+        <button
+          type="button"
+          data-carousel-prev="espacio-carousel"
+          class="md:hidden flex items-center justify-center absolute left-1 top-[35%] -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg border border-ink-200/60 text-ink-600 hover:text-brand-dark transition-colors z-10 cursor-pointer"
+          aria-label="Anterior"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button
+          type="button"
+          data-carousel-next="espacio-carousel"
+          class="md:hidden flex items-center justify-center absolute right-1 top-[35%] -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg border border-ink-200/60 text-ink-600 hover:text-brand-dark transition-colors z-10 cursor-pointer"
+          aria-label="Siguiente"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
     </div>
 
@@ -92,12 +116,36 @@ const porNecesidad = [
         <span class="w-6 h-0.5 bg-brand rounded-full" aria-hidden="true"></span>
         Por necesidad
       </h3>
-      <div class="grid md:grid-cols-3 gap-6">
-        {porNecesidad.map((t, i) => (
-          <div class={`aos aos-delay-${(i % 3) + 1} h-full`}>
-            <ServiceCard title={t.title} desc={t.desc} img={t.img} alt={t.alt} href={t.href} tag={t.tag} />
-          </div>
-        ))}
+      <div class="relative">
+        <div
+          id="necesidad-carousel"
+          class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-2
+                 -mx-4 px-4 sm:mx-0 sm:px-0
+                 md:grid md:grid-cols-3 md:overflow-visible md:pb-0
+                 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {porNecesidad.map((t, i) => (
+            <div class={`aos aos-delay-${(i % 3) + 1} snap-start shrink-0 w-[84vw] sm:w-[360px] md:w-auto h-full`}>
+              <ServiceCard title={t.title} desc={t.desc} img={t.img} alt={t.alt} href={t.href} tag={t.tag} />
+            </div>
+          ))}
+        </div>
+        <button
+          type="button"
+          data-carousel-prev="necesidad-carousel"
+          class="md:hidden flex items-center justify-center absolute left-1 top-[35%] -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg border border-ink-200/60 text-ink-600 hover:text-brand-dark transition-colors z-10 cursor-pointer"
+          aria-label="Anterior"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button
+          type="button"
+          data-carousel-next="necesidad-carousel"
+          class="md:hidden flex items-center justify-center absolute right-1 top-[35%] -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg border border-ink-200/60 text-ink-600 hover:text-brand-dark transition-colors z-10 cursor-pointer"
+          aria-label="Siguiente"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
     </div>
 
@@ -110,3 +158,18 @@ const porNecesidad = [
     </div>
   </div>
 </section>
+
+<script>
+// "Por espacio" / "Por necesidad" carousels (mobile only — grid returns at md:)
+function initCarousel(id: string) {
+  const track = document.getElementById(id);
+  if (!track) return;
+  const prevBtn = document.querySelector(`[data-carousel-prev="${id}"]`);
+  const nextBtn = document.querySelector(`[data-carousel-next="${id}"]`);
+  const cardStep = () => (track.firstElementChild as HTMLElement)?.getBoundingClientRect().width + 24 || 300;
+  prevBtn?.addEventListener('click', () => track.scrollBy({ left: -cardStep(), behavior: 'smooth' }));
+  nextBtn?.addEventListener('click', () => track.scrollBy({ left: cardStep(), behavior: 'smooth' }));
+}
+initCarousel('espacio-carousel');
+initCarousel('necesidad-carousel');
+</script>
