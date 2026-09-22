@@ -136,15 +136,31 @@ import { LEADS } from '../config/leads';
             <!-- Zona -->
             <div>
               <label for="modal-zona" class="block text-xs font-semibold text-ink mb-1">
-                Barrio o zona en Barranquilla
+                Barrio o zona en Barranquilla <span class="text-brand">*</span>
               </label>
               <input
-                type="text" id="modal-zona" name="zona"
+                type="text" id="modal-zona" name="zona" required
                 placeholder="El Prado, Norte, Altamira..."
                 class="w-full px-3.5 py-2.5 rounded-xl border border-ink-200 text-sm
                        focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20
                        transition-all placeholder:text-ink-300"
               />
+            </div>
+
+            <!-- Cantidad aproximada -->
+            <div>
+              <label for="modal-cantidad" class="block text-xs font-semibold text-ink mb-1">
+                Cantidad de espacios <span class="text-brand">*</span>
+              </label>
+              <select id="modal-cantidad" name="cantidad" required
+                class="w-full px-3.5 py-2.5 rounded-xl border border-ink-200 text-sm text-ink-600 focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all bg-white">
+                <option value="" disabled selected>Selecciona</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5+">5 o más</option>
+              </select>
             </div>
 
             <!-- Mensaje opcional -->
@@ -360,8 +376,8 @@ form.addEventListener('submit', async (e) => {
   const servicio = resolveServicio();
 
   // Basic validation
-  if (!data.nombre || !data.telefono || !servicio || (servicio === 'otra' && !String(data.otra_servicio || '').trim())) {
-    errorText.textContent = 'Por favor completa nombre, WhatsApp y tipo de instalación.';
+  if (!data.nombre || !data.telefono || !servicio || !data.zona || !data.cantidad || (servicio === 'otra' && !String(data.otra_servicio || '').trim())) {
+    errorText.textContent = 'Completa nombre, WhatsApp, servicio, zona y cantidad.';
     errorEl.classList.remove('hidden');
     return;
   }
@@ -382,6 +398,7 @@ form.addEventListener('submit', async (e) => {
         email: '',
         servicio,
         zona: data.zona || '',
+        cantidad: data.cantidad || '',
         mensaje: data.mensaje || '',
         fuente: 'mallas-barranquilla.com',
       }),
