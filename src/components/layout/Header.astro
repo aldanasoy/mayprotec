@@ -170,8 +170,10 @@ const overlay       = document.getElementById('menu-overlay')!;
 const iconMenu      = document.getElementById('icon-menu')!;
 const iconClose     = document.getElementById('icon-close')!;
 let   wasOverflow   = '';
+let   lastFocused: HTMLElement | null = null;
 
 function openMenu() {
+  lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
   mobileMenu.classList.remove('translate-x-full');
   mobileMenu.setAttribute('aria-hidden', 'false');
   overlay.classList.remove('opacity-0', 'pointer-events-none');
@@ -181,6 +183,7 @@ function openMenu() {
   // lock body scroll
   wasOverflow = document.body.style.overflow;
   document.body.style.overflow = 'hidden';
+  menuClose.focus();
 }
 function closeMenu() {
   mobileMenu.classList.add('translate-x-full');
@@ -190,6 +193,7 @@ function closeMenu() {
   iconMenu.classList.remove('hidden');
   iconClose.classList.add('hidden');
   document.body.style.overflow = wasOverflow;
+  lastFocused?.focus();
 }
 
 menuToggle.addEventListener('click', () => {
