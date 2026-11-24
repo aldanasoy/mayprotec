@@ -1,5 +1,14 @@
 # Mayprotec — Contexto del Proyecto
 
+## Sprint: campos mínimos para estimado y alerta estructurada (21-sep-2026)
+
+- Formularios modal y contacto mantienen captura corta: nombre, WhatsApp, servicio, zona y cantidad de espacios; correo y detalles siguen opcionales.
+- `zona` y `cantidad` son obligatorios en cliente y en `functions/api/lead.js`.
+- Telegram identifica explícitamente `Mayprotec` y `mallas-barranquilla.com`, y separa servicio, zona, cantidad y detalles.
+- GestionaLeads recibe notas etiquetadas y legibles.
+- Prueba contractual: `node tests/lead-form-contract.test.mjs`.
+- Verificación sin tráfico externo: prueba contractual OK y `npm run build` (20 páginas) OK. No se enviaron leads ni mensajes de prueba.
+
 **Repositorio**: https://github.com/aldanasoy/mayprotec
 **Stack**: Astro + Tailwind
 **Propietario**: Arcoso LLC / Sergio Aldana

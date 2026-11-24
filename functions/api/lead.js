@@ -28,11 +28,12 @@ export async function onRequest(context) {
   const email = String(data.email || '').trim();
   const servicio = String(data.servicio || '').trim();
   const zona = String(data.zona || '').trim();
+  const cantidad = String(data.cantidad || '').trim();
   const mensaje = String(data.mensaje || '').trim();
   const fuente = String(data.fuente || 'mallas-barranquilla.com').trim();
 
-  if (!nombre || !telefono || !servicio) {
-    return new Response(JSON.stringify({ error: 'Faltan campos requeridos (nombre, telefono, servicio)' }), {
+  if (!nombre || !telefono || !servicio || !zona || !cantidad) {
+    return new Response(JSON.stringify({ error: 'Faltan campos requeridos (nombre, telefono, servicio, zona, cantidad)' }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
     });
@@ -46,13 +47,17 @@ export async function onRequest(context) {
   // ── Telegram ──
   if (tgToken && tgChatId) {
     const tgMsg = [
-      `<b>📞 Nuevo Lead — Mayprotec (Form)</b>`,
+      `<b>Nuevo lead — Mayprotec</b>`,
+      ``,
+      `<b>Empresa:</b> Mayprotec`,
+      `<b>Website:</b> mallas-barranquilla.com`,
       ``,
       `<b>Nombre:</b> ${esc(nombre)}`,
       `<b>WhatsApp:</b> ${esc(telefono)}`,
       email ? `<b>Email:</b> ${esc(email)}` : null,
       `<b>Servicio:</b> ${esc(servicio)}`,
-      zona ? `<b>Zona:</b> ${esc(zona)}` : null,
+      `<b>Zona:</b> ${esc(zona)}`,
+      `<b>Cantidad:</b> ${esc(cantidad)} espacios`,
       mensaje ? `<b>Detalles:</b> ${esc(mensaje)}` : null,
       ``,
       `<b>Hora:</b> ${esc(timestamp)}`,
@@ -85,7 +90,7 @@ export async function onRequest(context) {
           telefono,
           email,
           fuente,
-          notas: `Servicio: ${servicio}. Zona: ${zona}. ${mensaje}`,
+          notas: [`Servicio: ${servicio}`, `Zona: ${zona}`, `Cantidad: ${cantidad} espacios`, mensaje && `Detalles: ${mensaje}`].filter(Boolean).join(' | '),
         }),
       });
       if (!glRes.ok) {
