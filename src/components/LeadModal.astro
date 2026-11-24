@@ -2,7 +2,6 @@
 // LeadModal.astro — Sistema de captación de leads para Mayprotec
 // Inspired by Repararya's modal system
 // Backend: Telegram (live) + Supabase + GestionaLeads (config via env)
-import { LEADS } from '../config/leads';
 ---
 
 <!-- Trigger button para añadir en cualquier sección -->
@@ -222,10 +221,10 @@ import { LEADS } from '../config/leads';
           </svg>
         </div>
         <h3 class="font-display font-bold text-2xl text-ink mb-2">
-          ¡Recibimos tu solicitud!
+          Solicitud recibida
         </h3>
         <p class="text-ink-500 text-sm leading-relaxed mb-4">
-          Gracias <strong id="success-name" class="text-ink"></strong>.
+          Gracias <strong id="success-name" class="text-ink"></strong> por escribirnos.
         </p>
         <div class="bg-orange-50 border border-orange-200 rounded-2xl p-3.5 text-left flex gap-2.5 mb-5">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a3412"
@@ -234,21 +233,9 @@ import { LEADS } from '../config/leads';
             <path d="M10.3 3.9 2.5 18a1 1 0 0 0 .9 1.5h17.2a1 1 0 0 0 .9-1.5L13.7 3.9a1 1 0 0 0-1.4 0Z"/>
           </svg>
           <p class="text-xs text-orange-900 leading-relaxed">
-            Por el momento tenemos <strong>inconvenientes técnicos con nuestro WhatsApp principal</strong>. Uno de nuestros colaboradores te contactará muy pronto — mantente atento a una <strong>llamada</strong> o a un mensaje de <strong>WhatsApp de uno de nuestros aliados comerciales en la ciudad</strong>.
+            Tenemos una falla temporal en nuestro WhatsApp principal, así que un colaborador te contactará pronto por <strong>llamada</strong> o por <strong>WhatsApp desde otro número de nuestros aliados locales</strong>. ¡Estate atento!
           </p>
         </div>
-
-        <!-- WhatsApp CTA -->
-        <a
-          id="success-wa-link"
-          href="#"
-          target="_blank"
-          rel="noopener"
-          class="btn-whatsapp w-full justify-center mb-3"
-        >
-          <img src="/images/whatsapp-logo.svg" alt="WhatsApp" width="18" height="18" loading="lazy" />
-          Escribir por WhatsApp ahora
-        </a>
 
         <button
           id="modal-reset"
@@ -264,17 +251,7 @@ import { LEADS } from '../config/leads';
 <!-- ══════════════════════════════════════════
      LEAD SUBMISSION SCRIPT
 ════════════════════════════════════════════ -->
-<!-- Config globals (inlined — needed because Astro strips ESM imports from bundles) -->
-<!-- Solo datos publicos aqui. Telegram/GestionaLeads viven server-side en functions/api/lead.js -->
-<script is:inline set:html={`
-  window.__LEADS_CFG__ = {
-    WA_NUMBER: ${JSON.stringify(LEADS.WA_NUMBER)},
-  };
-`} />
 <script>
-// ─── Config ──────────────────────────────────────────────────────────────────
-const CFG = window.__LEADS_CFG__;
-
 // ─── Modal state ──────────────────────────────────────────────────────────────
 const modal   = document.getElementById('lead-modal')!;
 const panel   = document.getElementById('modal-panel')!;
@@ -421,12 +398,6 @@ form.addEventListener('submit', async (e) => {
 
     (document.getElementById('success-name') as HTMLElement).textContent =
       (data.nombre as string).split(' ')[0];
-
-    const waMsg = encodeURIComponent(
-      `Hola, soy ${data.nombre}. Acabo de solicitar una cotización en mallas-barranquilla.com para ${servicio} en ${data.zona || 'Barranquilla'}.`
-    );
-    (document.getElementById('success-wa-link') as HTMLAnchorElement).href =
-      `https://wa.me/${CFG.WA_NUMBER}?text=${waMsg}`;
 
     stepForm.classList.add('hidden');
     stepSuccess.classList.remove('hidden');
